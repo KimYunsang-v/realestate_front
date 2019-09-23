@@ -1,0 +1,34 @@
+.popupDiv{
+    width: 500px;
+    height: 10px;
+}
+.imgUl{
+    list-style:none;
+    padding-left:0px;
+    text-align: center;
+}
+.imgUl li{
+    display: inline-block;
+    
+}
+.theme1{
+    /* width: 80px;
+    height: 100px; */
+    display: inline-block;
+}
+.theme_img{
+    vertical-align: middle;
+}
+.theme_name{
+    vertical-align: middle;
+} 
+.theme1 input[id="pr"], input[id="ca"],input[id="sc"],input[id="hs"],input[id="ci"],input[id="con"],input[id="po"],input[id="fr"],input[id="su"],input[id="cc"]{
+    display: none;
+}
+.title{display:inline}
+.dealTypeDiv{
+    padding-top: 1%;
+}
+.paginationDiv {
+    text-align: center;
+}
