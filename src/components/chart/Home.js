@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
-import SelectPage from '../selectPage/SelectPage';
+import SelectPage from './SelectPage';
 import ChartsPage from '../chart/Chart';
 import * as service from '../../lib/chartDataApi';
-import './Page.css';
+import '../pages/Page.css';
 
 class Home extends Component{
     state = {

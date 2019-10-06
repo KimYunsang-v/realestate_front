@@ -5,47 +5,53 @@ import ChartMonth from 'highcharts/ChartMonth';
 import {Grid, Segment, GridColumn} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
-class chart extends Component {
+class Chart extends Component {
     render() {
         // 조건 및 결과 데이터
         const {conditionData} = this.props;
+
+        console.log(conditionData)
 
         const style = {
             padding:'1rem'
         };
         var dealtype='';
         var housingtype='';
+        var bargainApart = [], bargainOffistel = [], bargainHouse = [], charterApart = [], charterOffistel = [], charterHouse = []
+                ,rentApart = [], rentOffistel = [], rentHouse = [];
         var i=0,dap=[],dho=[],dop=[],lop=[],lho=[],lap=[],mapp=[],mho=[],mop=[];
         
+
+
         for(i=0;i<9;i++){
             if(conditionData.result[i]!==undefined){
-
                 dealtype=conditionData.result[i].dealType;
                 housingtype=conditionData.result[i].housingType;
+                
 
                 if(dealtype === '매매'){
                     if(housingtype === 'apart'){
-                         dap=conditionData.result[i].average;
+                        bargainApart = conditionData.result[i].average;
                     }else if(housingtype === 'housing'){
-                         dho=conditionData.result[i].average;
+                        bargainHouse = conditionData.result[i].average;
                     }else{
-                         dop=conditionData.result[i].average;
+                        bargainOffistel =conditionData.result[i].average;
                     }
                 }else if(dealtype === '전세'){
                     if(housingtype === 'apart'){
-                        lap=conditionData.result[i].average;
+                        charterApart = conditionData.result[i].average;
                     }else if(housingtype === 'housing'){
-                        lho = conditionData.result[i].average;
+                        charterHouse = conditionData.result[i].average;
                     }else{
-                        lop=conditionData.result[i].average;
+                        charterOffistel = conditionData.result[i].average;
                     }
                 }else{
                     if(housingtype === 'apart'){
-                        mapp=conditionData.result[i].average;
+                        rentApart = conditionData.result[i].average;
                     }else if(housingtype === 'housing'){
-                        mho=conditionData.result[i].average;
+                        rentOffistel = conditionData.result[i].average;
                     }else{
-                        mop=conditionData.result[i].average;
+                        rentHouse = conditionData.result[i].average;
                     }
                 }
             }
@@ -71,4 +77,4 @@ class chart extends Component {
     }
 }
 
-export default chart;
+export default Chart;
