@@ -12,7 +12,7 @@ class Navigator extends Component {
                     <NavLink exact to="/"> 
                         <Button color="blue">그래프</Button>
                     </NavLink>
-                    <NavLink exact to="/search/">    
+                    <NavLink exact to="/search/">
                         <Button color ="violet">검색</Button>
                     </NavLink>
                     <NavLink exact to="/question">
@@ -21,7 +21,7 @@ class Navigator extends Component {
                     {/* <NavLink exact to="/search/foo">
                         <Button color="purple">질문</Button>
                     </NavLink> */}
-                    <NavLink exact to="/login">    
+                    <NavLink exact to="/login">
                         <Button color="pink">로그인</Button>
                     </NavLink>
                 </div>

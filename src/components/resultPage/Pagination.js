@@ -12,7 +12,7 @@ const defaultProps = {
     initialPage: 1,
     pageSize: 3
 }
- 
+
 class Pagination extends Component {
     constructor(props) {
         super(props);

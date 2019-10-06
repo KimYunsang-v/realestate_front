@@ -20,7 +20,7 @@ class ChartDeal extends Component {
         
         const config = {
             title: {
-                text: '매매'
+                text: '아파트'
             },
             xAxis:{
                 categories:['2011년','2012년','2013년','2014년','2015년','2016년','2017년','2018년']
@@ -36,13 +36,13 @@ class ChartDeal extends Component {
                 verticalAlign: 'middle'
             },
             series:[{
-                name:'오피스텔',
+                name:'매매',
                 data:op
             },{
-                name:'주택',
+                name:'전세',
                 data:ho
             },{
-                name:'아파트',
+                name:'월세',
                 data:ap
             }],
             responsive: {

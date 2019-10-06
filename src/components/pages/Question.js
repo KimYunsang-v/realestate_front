@@ -35,16 +35,17 @@ class Question extends Component {
 
     componentDidMount() {
         var userid=''
-        if(sessionStorage.getItem("user")===null){
-            alert("로그인 후 이용할 수 있습니다.");
-            this.props.history.push("/login");
-        }else{
-            userid=sessionStorage.getItem("user").split(":")
+        // if(sessionStorage.getItem("user")===null){
+        //     alert("로그인 후 이용할 수 있습니다.");
+        //     this.props.history.push("/login");
+        // }else{
+            //userid=sessionStorage.getItem("user").split(":")
+            userid="윤상"
             this.setState({
                 user:userid[0]
             })
             this.boardData()
-        }
+        // }
     }
     // 게시판 데이터 get
     boardData = async () => {

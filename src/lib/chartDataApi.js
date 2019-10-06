@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "http://54.180.120.77:8080";
+const url = "http://localhost:8080";
 
 export function getOnlyCity(city) {
     return axios.get(`${url}/realestate/graph/city/${city}`);
@@ -35,6 +35,3 @@ export function getCityAndNeighborhood(city, neighborhood) {
 export function getCityAndNeighborhoodAndDate(city, neighborhood, date) {
     return axios.get(`${url}/realestate/graph/city/${city}/neighborhood/${neighborhood}/date/${date}`);
 }
-
-
-

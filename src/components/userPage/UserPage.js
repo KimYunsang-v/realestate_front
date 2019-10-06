@@ -28,8 +28,7 @@ class UserPage extends Component {
             userid: userid[0],
             username: userid[1],
             key:key
-        })
-    
+        })    
     }
     updateInfo = async() => {
         let data = []
