@@ -3,11 +3,25 @@ import ReactHighcharts from 'react-highcharts';
 
 class ChartItem extends Component {
 
+    state = {
+
+    }
+
+    setXAxit = (type, length)  => {
+
+        
+
+        return ;
+    }
     
     
     render() {
 
-        const { title } = this.props;
+        const { title, apart, offistel, house } = this.props;
+
+        // console.log(apart, title);
+        // console.log(offistel, title);
+        // console.log(house, title);
 
         const style ={
             minwidth: '310px',
@@ -16,7 +30,9 @@ class ChartItem extends Component {
 	        margin: '0 auto'
         };
 
-
+        const xAxisList = Object.keys(apart);
+        
+        console.log(xAxisList);
         const op = this.props.dop; 
         const ho = this.props.dho;
         const ap = this.props.dap;
@@ -30,7 +46,8 @@ class ChartItem extends Component {
                 text: title
             },
             xAxis:{
-                categories:['2011년','2012년','2013년','2014년','2015년','2016년','2017년','2018년']
+                //categories: ['2011년','2012년','2013년','2014년','2015년','2016년','2017년','2018년']
+                categories: xAxisList
             },
             yAxis: {
                 title: {
@@ -44,7 +61,7 @@ class ChartItem extends Component {
             },
             series:[{
                 name:'아파트',
-                data:op
+                data:ap
             },{
                 name:'오피스텔',
                 data:ho

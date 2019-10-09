@@ -219,7 +219,7 @@ class SearchPage extends Component {
                                 </li>
                                 <li><label className="theme1">
                                     <input type="checkbox" id="sc" value="sc" onChange={this.handleCheck} defaultChecked={checked2} />
-                                    <div className="imgDiv">{checked2 ? (<Image src={clicked[2]} size="tiny" centered />) : (<Image src={require("../image/school_un.png")} size="tiny" centered />)}</div>
+                                    <div className="imgDiv">{checked2 ? (<Image src={clicked[2]} size="tiny" centered />) : (<Image src={require("../../image/school_un.png")} size="tiny" centered />)}</div>
                                     <span className="theme_name">학교</span>
                                 </label>
                                 </li>

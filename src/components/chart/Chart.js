@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import ChartDeal from 'highcharts/ChartDeal';
-import ChartLease from 'highcharts/ChartLease'
-import ChartMonth from 'highcharts/ChartMonth';
+import ChartItem from './ChartItem';
 import {Grid, Segment, GridColumn} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -17,30 +15,28 @@ class Chart extends Component {
         };
         var dealtype='';
         var housingtype='';
-        var bargainApart = [], bargainOffistel = [], bargainHouse = [], charterApart = [], charterOffistel = [], charterHouse = []
-                ,rentApart = [], rentOffistel = [], rentHouse = [];
-        var i=0,dap=[],dho=[],dop=[],lop=[],lho=[],lap=[],mapp=[],mho=[],mop=[];
-        
-
+        var bargainApart = {}, bargainOffistel = {}, bargainHouse = {}, charterApart = {}, charterOffistel = {}, charterHouse = {}
+                ,rentApart = {}, rentOffistel = {}, rentHouse = {};
+        var i = 0;
+        // var i=0,dap=[],dho=[],dop=[],lop=[],lho=[],lap=[],mapp=[],mho=[],mop=[];
 
         for(i=0;i<9;i++){
             if(conditionData.result[i]!==undefined){
                 dealtype=conditionData.result[i].dealType;
-                housingtype=conditionData.result[i].housingType;
-                
+                housingtype=conditionData.result[i].housingType;                
 
-                if(dealtype === '매매'){
+                if(dealtype === 'bargain'){
                     if(housingtype === 'apart'){
                         bargainApart = conditionData.result[i].average;
-                    }else if(housingtype === 'housing'){
+                    }else if(housingtype === 'house'){
                         bargainHouse = conditionData.result[i].average;
                     }else{
                         bargainOffistel =conditionData.result[i].average;
                     }
-                }else if(dealtype === '전세'){
+                }else if(dealtype === 'charter'){
                     if(housingtype === 'apart'){
                         charterApart = conditionData.result[i].average;
-                    }else if(housingtype === 'housing'){
+                    }else if(housingtype === 'house'){
                         charterHouse = conditionData.result[i].average;
                     }else{
                         charterOffistel = conditionData.result[i].average;
@@ -48,7 +44,7 @@ class Chart extends Component {
                 }else{
                     if(housingtype === 'apart'){
                         rentApart = conditionData.result[i].average;
-                    }else if(housingtype === 'housing'){
+                    }else if(housingtype === 'house'){
                         rentOffistel = conditionData.result[i].average;
                     }else{
                         rentHouse = conditionData.result[i].average;
@@ -62,13 +58,13 @@ class Chart extends Component {
                 <Segment>
                     <Grid columns={3} relaxed='very'>
                         <GridColumn>
-                            <ChartDeal dop={dop} dap={dap} dho={dho}/>
+                            <ChartItem title={"매매"} apart={bargainApart} offistel={bargainOffistel}  house = {bargainHouse}/>
                         </GridColumn>
                         <GridColumn>
-                            <ChartLease lop={lop} lap={lap} lho={lho}/>
+                            <ChartItem title={"전세"} apart={charterApart} offistel={charterOffistel} house = {charterHouse}/>
                         </GridColumn>
                         <GridColumn>
-                            <ChartMonth mop={mop} mho={mho} map={mapp}/>
+                            <ChartItem title={"월세"} apart={rentApart} offistel={rentOffistel} house = {rentHouse} />
                         </GridColumn>
                     </Grid>
                 </Segment>
