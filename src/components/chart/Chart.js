@@ -15,10 +15,9 @@ class Chart extends Component {
         };
         var dealtype='';
         var housingtype='';
-        var bargainApart = {}, bargainOffistel = {}, bargainHouse = {}, charterApart = {}, charterOffistel = {}, charterHouse = {}
-                ,rentApart = {}, rentOffistel = {}, rentHouse = {};
+        var bargainApart = {}, bargainOfficetel = {}, bargainHouse = {}, charterApart = {}, charterOfficetel = {}, charterHouse = {}
+                ,rentApart = {}, rentOfficetel = {}, rentHouse = {};
         var i = 0;
-        // var i=0,dap=[],dho=[],dop=[],lop=[],lho=[],lap=[],mapp=[],mho=[],mop=[];
 
         for(i=0;i<9;i++){
             if(conditionData.result[i]!==undefined){
@@ -31,7 +30,7 @@ class Chart extends Component {
                     }else if(housingtype === 'house'){
                         bargainHouse = conditionData.result[i].average;
                     }else{
-                        bargainOffistel =conditionData.result[i].average;
+                        bargainOfficetel = conditionData.result[i].average;
                     }
                 }else if(dealtype === 'charter'){
                     if(housingtype === 'apart'){
@@ -39,13 +38,13 @@ class Chart extends Component {
                     }else if(housingtype === 'house'){
                         charterHouse = conditionData.result[i].average;
                     }else{
-                        charterOffistel = conditionData.result[i].average;
+                        charterOfficetel = conditionData.result[i].average;
                     }
                 }else{
                     if(housingtype === 'apart'){
                         rentApart = conditionData.result[i].average;
                     }else if(housingtype === 'house'){
-                        rentOffistel = conditionData.result[i].average;
+                        rentOfficetel = conditionData.result[i].average;
                     }else{
                         rentHouse = conditionData.result[i].average;
                     }
@@ -58,13 +57,13 @@ class Chart extends Component {
                 <Segment>
                     <Grid columns={3} relaxed='very'>
                         <GridColumn>
-                            <ChartItem title={"매매"} apart={bargainApart} offistel={bargainOffistel}  house = {bargainHouse}/>
+                            <ChartItem title={"매매"} apart={bargainApart} officetel={bargainOfficetel}  house = {bargainHouse}/>
                         </GridColumn>
                         <GridColumn>
-                            <ChartItem title={"전세"} apart={charterApart} offistel={charterOffistel} house = {charterHouse}/>
+                            <ChartItem title={"전세"} apart={charterApart} officetel={charterOfficetel} house = {charterHouse}/>
                         </GridColumn>
                         <GridColumn>
-                            <ChartItem title={"월세"} apart={rentApart} offistel={rentOffistel} house = {rentHouse} />
+                            <ChartItem title={"월세"} apart={rentApart} officetel={rentOfficetel} house = {rentHouse} />
                         </GridColumn>
                     </Grid>
                 </Segment>

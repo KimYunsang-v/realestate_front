@@ -6,18 +6,10 @@ class ChartItem extends Component {
     state = {
 
     }
-
-    setXAxit = (type, length)  => {
-
-        
-
-        return ;
-    }
-    
     
     render() {
 
-        const { title, apart, offistel, house } = this.props;
+        const { title, apart, officetel, house } = this.props;
 
         // console.log(apart, title);
         // console.log(offistel, title);
@@ -33,6 +25,10 @@ class ChartItem extends Component {
         const xAxisList = Object.keys(apart);
         
         console.log(xAxisList);
+        const apartDataList = Object.values(apart);
+        const officetelDataList = Object.values(officetel);
+        const housetDataList = Object.values(house);
+
         const op = this.props.dop; 
         const ho = this.props.dho;
         const ap = this.props.dap;
@@ -61,13 +57,13 @@ class ChartItem extends Component {
             },
             series:[{
                 name:'아파트',
-                data:ap
+                data:apartDataList
             },{
                 name:'오피스텔',
-                data:ho
+                data:officetelDataList
             },{
                 name:'연립다세대',
-                data:ap
+                data:housetDataList
             }],
             responsive: {
                 rules: [{
@@ -84,6 +80,7 @@ class ChartItem extends Component {
                 }]
             }
         };
+        
         return (
             <div sytle={style}>
                 <ReactHighcharts config ={config}></ReactHighcharts>
