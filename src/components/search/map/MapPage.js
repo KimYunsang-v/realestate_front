@@ -59,34 +59,34 @@ class MapPage extends Component {
 
             for (let i = 0; i < data.length; i++) {
                 position = new daum.maps.LatLng(data[i].latitude, data[i].longitude);
-                var markerImage = null ;
+                var markerImage = null;
 
                 if (data[i].type === "아파트" && data[i].dealType === "전세") {
-                    markerImageSrc =require("../../image/marker_LA.png");
+                    markerImageSrc =require("../../../image/marker_LA.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "아파트" && data[i].dealType === "매매") {
-                    markerImageSrc =require("../../image/marker_DA.png");
+                    markerImageSrc =require("../../../image/marker_DA.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "아파트" && data[i].dealType === "월세") {
-                    markerImageSrc =require("../../image/marker_MA.png");
+                    markerImageSrc =require("../../../image/marker_MA.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "오피스텔" && data[i].dealType === "전세") {
-                    markerImageSrc =require("../../image/marker_LO.png");
+                    markerImageSrc =require("../../../image/marker_LO.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "오피스텔" && data[i].dealType === "매매") {
-                    markerImageSrc =require("../../image/marker_DO.png");
+                    markerImageSrc =require("../../../image/marker_DO.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "오피스텔" && data[i].dealType === "월세") {
-                    markerImageSrc =require("../../image/marker_MO.png");
+                    markerImageSrc =require("../../../image/marker_MO.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "주택" && data[i].dealType === "전세") {
-                    markerImageSrc =require("../../image/marker_LH.png");
+                    markerImageSrc =require("../../../image/marker_LH.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "주택" && data[i].dealType === "매매") {
-                    markerImageSrc =require("../../image/marker_DH.png");
+                    markerImageSrc =require("../../../image/marker_DH.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 } else if (data[i].type === "주택" && data[i].dealType === "월세") {
-                    markerImageSrc =require("../../image/marker_MH.png");
+                    markerImageSrc =require("../../../image/marker_MH.png");
                     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
                 }
 

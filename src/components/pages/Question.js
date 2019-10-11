@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { QuestionList } from 'components/questionPage';
+import { QuestionList } from 'components/question';
 import * as service from '../../lib/boardApi';
 import { Modal, Button, Comment, Header, Form, Divider } from 'semantic-ui-react';
 

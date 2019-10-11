@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginPage from '../loginPage/LoginPage';
+import LoginPage from '../login/LoginPage';
 import * as service from '../../lib/LoginApi';
 
 class Login extends Component {

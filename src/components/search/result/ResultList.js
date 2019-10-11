@@ -3,9 +3,9 @@ import { Grid, Image, Segment, Label } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
 const hosingType=[
-    {value :require('../../image/apart.png')},
-    {value :require('../../image/officetel.PNG')},
-    {value :require('../../image/house.jpg')}
+    {value :require('../../../image/apart.png')},
+    {value :require('../../../image/officetel.PNG')},
+    {value :require('../../../image/house.jpg')}
 ]
 class ResultList extends Component {
     static defaultProps = {

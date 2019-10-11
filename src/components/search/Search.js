@@ -1,9 +1,9 @@
 /*global daum*/
 import React, {Component} from 'react';
-import SearchPage from '../searchPage/SearchPage';
-import MapPage from '../mapPage/MapPage';
-import ResultPage from '../resultPage/ResultPage';
-import './Page.css';
+import SearchPage from './SearchPage';
+import MapPage from './map/MapPage';
+import ResultPage from './result/ResultPage';
+import '../pages/Page.css';
 import * as service from '../../lib/bulidingInfoApi'
 
 class Search extends Component {
@@ -226,8 +226,7 @@ class Search extends Component {
                         dealType: '매매',
                         latitude:'37.614996',
                         longitude: '127.010105'
-                    }
-                    
+                    }                    
                 ]
             }        
         });
