@@ -110,7 +110,6 @@ class Search extends Component {
         console.log(optionsData);
         if(optionsData.length===0) optionsData = null;
 
-
         // body
         const data = [];
 
