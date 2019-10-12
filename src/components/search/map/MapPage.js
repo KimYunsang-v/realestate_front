@@ -182,7 +182,7 @@ class MapPage extends Component {
         });
 
         const options = this.props.optionData;
-        if(options.length > 0){
+        if(options){
             console.log("옵션있음 "+options);
 
             this.setState({
@@ -282,7 +282,7 @@ class MapPage extends Component {
         return (
             <div>
                 <div id="map" className="mapStyle">
-                {Loading}
+                    {Loading}
                 </div>
             </div>
         )

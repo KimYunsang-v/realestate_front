@@ -27,7 +27,7 @@ export const clicked = {
     'school': require("../../image/school_c.png"),
     'hospital' : "//yaimg.yanolja.com/files/2016/1130/20161130143405dc1b94f6-c7ea-44ee-832c-0cc23c50220f.png",
     'culture' : "//yaimg.yanolja.com/files/2016/0531/20160531162834fec21303-274a-494d-862b-df53b8758e40.png",
-    'convenience':"//yaimg.yanolja.com/files/2016/1206/20161206190517373e1042-2ef9-4b32-910c-67d9620a711e.png",
+    'convenience': "//yaimg.yanolja.com/files/2016/1206/20161206190517373e1042-2ef9-4b32-910c-67d9620a711e.png",
     'mart': require("../../image/supermarket_c.png"),
     'bank': require("../../image/money_c.png"),
 }

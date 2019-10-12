@@ -15,9 +15,9 @@ const dealoptions = [
     { key: 'MONTH', text: '월세', value: 'MONTH' },
 ]
 
-const optionList = [{'school': '학교'}, {'subway':'지하철'}, 
-                        {'hospital':'병원'}, {'cafe': '카페'}, {'culture':'문화시설'},
-                        {'convenience': '편의점'}, {'mart': '대형마트'}, {'bank':'은행'} ];
+const optionList = {'school': '학교', 'subway':'지하철', 
+                        'hospital':'병원', 'cafe': '카페', 'culture':'문화시설',
+                        'convenience': '편의점', 'mart': '대형마트', 'bank':'은행'};
 
 const renderLabel = label =>({
     color:'blue',
@@ -45,7 +45,6 @@ class SearchPage extends Component {
             convenience: false,
             mart: false,
             bank: false,
-            // optionList: [],
             unclicked: data.unclicked,
             clicked: data.clicked,
             sendTheme:[],
@@ -58,7 +57,7 @@ class SearchPage extends Component {
     keyPress = (e) => {
         if (e.key === 'Enter') {
             console.log('do validate');
-            this.searchClick()
+            this.props.kakaoPlacesSearch(this.state.inputData);
         }
     }
     
@@ -111,28 +110,22 @@ class SearchPage extends Component {
     }
 
     //조건 선택 체크박스
-    handleCheck = (event) => {
-        var value = { value: event.target.value }
-
-        this.setState(
-            {
-                value : !value
-            }
-        )
-        
+    handleCheck = (event) => {        
+        this.setState({[event.target.value] : !this.state[event.target.value] })
     }
 
     chooseTheme=()=>{
         //const { checked, checked1, checked2, checked3, checked4, checked5, checked6, checked7 } = this.state
-        const {unclicked} = this.state
+        // const {unclicked} = this.state
         var theme=[],count=0
 
-        optionList.keys().map(item => {
-            if(this.state[item] === true){
-                theme = theme.concat(item);
+        console.log(this.state);
+        for(var key in optionList){
+            if(this.state[key] === true){
+                theme = theme.concat(key);
                 count++;
             }
-        })
+        }
 
         this.setState({
             sendTheme:theme,
@@ -150,7 +143,8 @@ class SearchPage extends Component {
     }
 
     render() {
-        const { checked, checked1, checked2, checked3, checked4, checked5, checked6, checked7,optionCount } = this.state
+        //const { checked, checked1, checked2, checked3, checked4, checked5, checked6, checked7,optionCount } = this.state
+        const { optionCount } = this.state
         const { unclicked, clicked } = this.state
         
         const option1 = ['school', 'subway', 'hospital', 'cafe'];
@@ -162,7 +156,8 @@ class SearchPage extends Component {
         return (
             <div className="topDiv">
                 <div className="searchDiv">
-                    <Input size="big" icon='search' placeholder='지역이나 역명' onChange={this.searchChange} value={this.state.inputSearch} onKeyDown={this.keyPress} />
+                    <Input size="big" icon='search' placeholder='지역이나 역명' onChange={this.searchChange} 
+                            value={this.state.inputSearch} onKeyDown={this.keyPress} />
 
                     <Dropdown
                         options={this.state.houseoptions}
@@ -187,19 +182,20 @@ class SearchPage extends Component {
                         renderLabel={renderLabel2}
                     />
 
-                <Popup open={this.state.isOpen} onOpen={this.popupBtnClick} onClose={this.popupBtnClick} trigger={<Button>조건 선택 ({optionCount>0?(<font>{optionCount}</font>):(<font>0</font>)})</Button>} position='bottom center' on='click' hideOnScroll>
+                <Popup open={this.state.isOpen} onOpen={this.popupBtnClick} onClose={this.popupBtnClick} 
+                    trigger={<Button>조건 선택 ({optionCount>0?(<font>{optionCount}</font>):(<font>0</font>)})</Button>} 
+                        position='bottom center' on='click' hideOnScroll>
                     <div className="popupDiv"></div>
                     <Grid centered divided columns={1}>
                         <Grid.Column textAlign='center'>
-                            <ul className="imgUl">                                
-                                 
+                            <ul className="imgUl">
                                 {option1.map(item => {
                                     return(
                                     <li>
                                         <label className="theme1">
                                             <input type="checkbox" id= {item} value = {item} onChange={this.handleCheck} 
-                                                defaultChecked={checked} />
-                                            {checked ? (<Image src={clicked[item]} size="tiny" centered />) : (<Image src={unclicked[item]} size="tiny" centered />)}
+                                                defaultChecked={this.state[item]} />
+                                            {this.state[item] ? (<Image src={clicked[item]} size="tiny" centered />) : (<Image src={unclicked[item]} size="tiny" centered />)}
                                             <span className="theme_name"> {optionList[item]} </span>
                                         </label>
                                     </li>
@@ -216,8 +212,8 @@ class SearchPage extends Component {
                                     <li>
                                         <label className="theme1">
                                             <input type="checkbox" id= {item} value = {item} onChange={this.handleCheck} 
-                                                defaultChecked={checked} />
-                                            {checked ? (<Image src={clicked[item]} size="tiny" centered/>) 
+                                                defaultChecked={this.state[item]} />
+                                            {this.state[item] ? (<Image src={clicked[item]} size="tiny" centered/>) 
                                                             : (<Image src={unclicked[item]} size="tiny" centered/>)}
                                             <span className="theme_name"> {optionList[item]} </span>
                                         </label>

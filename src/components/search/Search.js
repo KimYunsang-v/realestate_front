@@ -33,7 +33,6 @@ class Search extends Component {
         optionData: [],
         resultData: {
             date: '',
-
             // 백엔드 api 호출 후 얻는 결과값(위경도->mapPage에서 처리 , 건물설명->resultPage에서 처리) 
             buliding:[
                 //mapDataSet에서 값 셋팅
@@ -52,7 +51,7 @@ class Search extends Component {
     //SearchPage에서 검색
     searchDataSet = (data) => {
         console.log("Search>searchDataSet");
-        const {housingTypeData,dealTypeData,inputData,options} = data[0];
+        const {housingTypeData, dealTypeData, inputData, options} = data[0];
 
         this.setState({
             searchData:{
@@ -64,20 +63,18 @@ class Search extends Component {
             optionData:options,
             loading: true
         });
-        
-        if(inputData !== ''){
-            this.kakaoPlacesSearch(inputData);
+    }
+
+    //kakao 장소검색api 호출
+    kakaoPlacesSearch = async (input) => {      
+        if(input !== ''){
+            var ps = new daum.maps.services.Places();  
+            await ps.keywordSearch( input, this.placesSearchCB); 
         }else {
             this.setState({
                 loading: false
             });
         }
-    }
-
-    //kakao 장소검색api 호출
-    kakaoPlacesSearch = async (input) => {
-        var ps = new daum.maps.services.Places();  
-        await ps.keywordSearch( input, this.placesSearchCB); 
     }
 
     //kakao 장소검색api 콜백함수
@@ -100,7 +97,10 @@ class Search extends Component {
             alert('검색 결과 중 오류가 발생했습니다.');
             return false;
         }
+        this.setState({ loading : true});
     }
+
+    
 
     // MapPage에서 지정한 지도 좌표 (RightTop, LeftBottom)
     mapDataSet = async(mapData, optionsData) => {
@@ -136,7 +136,7 @@ class Search extends Component {
             var bulidinginfo = await service.getbuliding(data[0])
             console.log(bulidinginfo)
         }catch(e){
-
+            
         }
 
         //api 호출 후 결과값 set State
@@ -241,7 +241,8 @@ class Search extends Component {
         return(
             <div>
                 <div className="SearchDiv1">
-                    <SearchPage searchDataSet={this.searchDataSet}/>
+                    <SearchPage searchDataSet={this.searchDataSet}
+                        kakaoPlacesSearch = {this.kakaoPlacesSearch}/>
                 </div>
                 <div className="SearchDiv1">
                     <div className="SearchDivL">
