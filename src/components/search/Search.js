@@ -103,12 +103,12 @@ class Search extends Component {
     
 
     // MapPage에서 지정한 지도 좌표 (RightTop, LeftBottom)
-    mapDataSet = async(mapData, optionsData) => {
+    mapDataSet = async(mapData) => {
         console.log("Search>mapDataSet");
         //data -> set State -> api 호출
         console.log(mapData);
-        console.log(optionsData);
-        if(optionsData.length===0) optionsData = null;
+        //console.log(optionsData);
+        //if(optionsData.length===0) optionsData = null;
 
         // body
         const data = [];
@@ -126,7 +126,7 @@ class Search extends Component {
                     longitude: mapData[0].rightTop.longitude
                 }
             },
-            options: optionsData
+            //options: optionsData
         });
 
         console.log(data[0]);
@@ -143,7 +143,7 @@ class Search extends Component {
         let date = new Date();
         this.setState({
             loading: false,
-            optionData: optionsData,
+            //optionData: optionsData,
             resultData: {
                 date: date,
                 
@@ -157,11 +157,11 @@ class Search extends Component {
                         name: '서경대학교',
                         area: '4,735.14',
                         floor: '10',
-                        type: '오피스텔',
+                        type: 'officetel',
                         constructorYear: '1947',
                         price:'100',
                         deposit: '',
-                        dealType: '매매',
+                        dealType: 'bargain',
                         latitude:'37.615095',
                         longitude: '127.0109226'
         
@@ -173,11 +173,11 @@ class Search extends Component {
                         name: '서경대학교1',
                         area: '4,735.14',
                         floor: '10',
-                        type: '오피스텔',
+                        type: 'officetel',
                         constructorYear: '1947',
                         price:'100',
                         deposit: '100',
-                        dealType: '월세',
+                        dealType: 'rent',
                         latitude:'37.613750',
                         longitude: '127.011041'
                     },{
@@ -188,11 +188,11 @@ class Search extends Component {
                         name: 'SK 북한산시티아파트',
                         area: '59',
                         floor: '18',
-                        type: '아파트',
+                        type: 'apart',
                         constructorYear: '1947',
                         price:'100',
                         deposit: '7000',
-                        dealType: '전세',
+                        dealType: 'charter',
                         latitude:'37.616418',
                         longitude: '127.013854'
                     },{
@@ -203,11 +203,11 @@ class Search extends Component {
                         name: '삼각산 아이원아파트',
                         area: '114',
                         floor: '20',
-                        type: '아파트',
+                        type: 'apart',
                         constructorYear: '1947',
                         price:'90',
                         deposit: '8000',
-                        dealType: '전세',
+                        dealType: 'charter',
                         latitude:'37.6159452',
                         longitude: '127.0166303'
                     },{
@@ -218,11 +218,11 @@ class Search extends Component {
                         name: '정릉대림E편한세상아파트',
                         area: '114',
                         floor: '20',
-                        type: '주택',
+                        type: 'house',
                         constructorYear: '1947',
                         price:'9000',
                         deposit: '',
-                        dealType: '매매',
+                        dealType: 'bargain',
                         latitude:'37.614996',
                         longitude: '127.010105'
                     }                    
@@ -248,7 +248,7 @@ class Search extends Component {
                     <div className="SearchDivL">
                         <MapPage mapData={this.state.mapData.center} 
                                  mapDataSet={this.mapDataSet} 
-                                 resultData={this.state.resultData} 
+                                 resultData={this.state.resultData}
                                  loading={this.state.loading} 
                                  optionData={this.state.optionData}/>
                     </div>

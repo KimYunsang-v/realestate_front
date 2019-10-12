@@ -27,9 +27,9 @@ class ResultList extends Component {
     render() {
         const {city,groop,dong, name, area, floor, type,price, deposit,dealType} = this.props.info
         var housing=''
-        if(type==='아파트'){
+        if(type==='apart'){
             housing=hosingType[0].value
-        }else if(type==='오피스텔'){
+        }else if(type==='officetel'){
             housing=hosingType[1].value
         }else {
             housing=hosingType[2].value

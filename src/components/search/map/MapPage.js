@@ -16,10 +16,10 @@ class MapPage extends Component {
     }
 
     componentDidMount() {
-        console.log("MapPage>componentDidMount");
+        console.log("MapPage > componentDidMount");
     
         let el = document.getElementById('map');
-        let options = { 
+        let options = {
             center: new daum.maps.LatLng(37.615095,127.0109226), //지도의 중심좌표.
             level: 3,
             minLevel: 1,
@@ -61,34 +61,37 @@ class MapPage extends Component {
                 position = new daum.maps.LatLng(data[i].latitude, data[i].longitude);
                 var markerImage = null;
 
-                if (data[i].type === "아파트" && data[i].dealType === "전세") {
-                    markerImageSrc =require("../../../image/marker_LA.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "아파트" && data[i].dealType === "매매") {
-                    markerImageSrc =require("../../../image/marker_DA.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "아파트" && data[i].dealType === "월세") {
-                    markerImageSrc =require("../../../image/marker_MA.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "오피스텔" && data[i].dealType === "전세") {
-                    markerImageSrc =require("../../../image/marker_LO.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "오피스텔" && data[i].dealType === "매매") {
-                    markerImageSrc =require("../../../image/marker_DO.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "오피스텔" && data[i].dealType === "월세") {
-                    markerImageSrc =require("../../../image/marker_MO.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "주택" && data[i].dealType === "전세") {
-                    markerImageSrc =require("../../../image/marker_LH.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "주택" && data[i].dealType === "매매") {
-                    markerImageSrc =require("../../../image/marker_DH.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                } else if (data[i].type === "주택" && data[i].dealType === "월세") {
-                    markerImageSrc =require("../../../image/marker_MH.png");
-                    markerImage =this.createMarkerImage(markerImageSrc,imageSize);
-                }
+                markerImageSrc = `{require(../../../image/marker_${data[i].dealType}_${data[i].type}.png)}`;
+                markerImage = this.createMarkerImage(markerImageSrc,imageSize);
+
+                // if (data[i].type === "아파트" && data[i].dealType === "전세") {
+                //     markerImageSrc = require("../../../image/marker_LA.png");
+                //     markerImage = this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "아파트" && data[i].dealType === "매매") {
+                //     markerImageSrc =require("../../../image/marker_DA.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "아파트" && data[i].dealType === "월세") {
+                //     markerImageSrc =require("../../../image/marker_MA.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "오피스텔" && data[i].dealType === "전세") {
+                //     markerImageSrc =require("../../../image/marker_LO.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "오피스텔" && data[i].dealType === "매매") {
+                //     markerImageSrc =require("../../../image/marker_DO.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "오피스텔" && data[i].dealType === "월세") {
+                //     markerImageSrc =require("../../../image/marker_MO.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "주택" && data[i].dealType === "전세") {
+                //     markerImageSrc =require("../../../image/marker_LH.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "주택" && data[i].dealType === "매매") {
+                //     markerImageSrc =require("../../../image/marker_DH.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // } else if (data[i].type === "주택" && data[i].dealType === "월세") {
+                //     markerImageSrc =require("../../../image/marker_MH.png");
+                //     markerImage =this.createMarkerImage(markerImageSrc,imageSize);
+                // }
 
                 var marker = this.createMarker(position,markerImage)
                 markers.push(marker);
@@ -113,6 +116,7 @@ class MapPage extends Component {
 
             return true;
         }
+
         console.log(nextProps.mapData);
         console.log(this.props.mapData);
         if (nextProps.mapData === this.props.mapData) { //조건 검색시 걸림.
@@ -181,77 +185,78 @@ class MapPage extends Component {
             }
         });
 
-        const options = this.props.optionData;
-        if(options){
-            console.log("옵션있음 "+options);
+        this.props.mapDataSet(data);
+        //const options = this.props.optionData;
+        // if(options.length()){
+        //     console.log("옵션있음 "+options);
 
-            this.setState({
-                mapInfo: data,
-                optionDataList: [],
-                optionCnt: options.length,
-                optionApiCnt: 0
-            });
+        //     this.setState({
+        //         mapInfo: data,
+        //         optionDataList: [],
+        //         optionCnt: options.length,
+        //         optionApiCnt: 0
+        //     });
 
-            // 카테고리 api 호출
-            this.kakaoCategorySearch();
-        } else {
-            console.log("옵션없음");
-            // 부모 컴포넌트로 전달
-            this.props.mapDataSet(data, options);
-        }
+        //     // 카테고리 api 호출
+        //     this.kakaoCategorySearch();
+        // } else {
+        //     console.log("옵션없음");
+        //     // 부모 컴포넌트로 전달
+        //     this.props.mapDataSet(data, options);
+        // }
     }
 
-    //kakao 카테고리검색api 호출
-    kakaoCategorySearch = async () => {
-        var ps = new daum.maps.services.Places(map);
+    // //kakao 카테고리검색api 호출
+    // kakaoCategorySearch = async () => {
+    //     var ps = new daum.maps.services.Places(map);
 
-        const options = this.props.optionData;
-        console.log("MapPage>categorySearch>"+options);
-        for (var i = 0; i < options.length; i++) {
-            await ps.categorySearch(options[i], this.categorySearchCB, { useMapBounds: true });
-        }
-    }
+    //     const options = this.props.optionData;
+    //     console.log("MapPage>categorySearch>"+options);
+    //     for (var i = 0; i < options.length; i++) {
+    //         await ps.categorySearch(options[i], this.categorySearchCB, { useMapBounds: true });
+    //     }
+    // }
 
-    //kakao 카테고리검색api 콜백함수
-    categorySearchCB = (data, status, pagination) => {
-        let { optionDataList } = this.state;
-        let { optionCnt, optionApiCnt } = this.state;
+    // //kakao 카테고리검색 api 콜백함수
+    // categorySearchCB = (data, status, pagination) => {
+    //     let { optionDataList } = this.state;
+    //     let { optionCnt, optionApiCnt } = this.state;
 
-        if (status === daum.maps.services.Status.OK) {
-            console.log("MapPage>categorySearchCB>검색결과있음");
-            for (var i = 0; i < data.length; i++) {
-                optionDataList = optionDataList.concat([
-                    {
-                        latitude: data[i].y,
-                        longitude: data[i].x
-                    }
-                ]);
-            }
-        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
-            console.log("MapPage>categorySearchCB>검색결과없음");
-        } else if (status === daum.maps.services.Status.ERROR) {
-            console.log("MapPage>categorySearchCB>검색결과오류");
-        }
+    //     if (status === daum.maps.services.Status.OK) {
+    //         console.log("MapPage>categorySearchCB>검색결과있음");
+    //         for (var i = 0; i < data.length; i++) {
+    //             optionDataList = optionDataList.concat([
+    //                 {
+    //                     latitude: data[i].y,
+    //                     longitude: data[i].x
+    //                 }
+    //             ]);
+    //         }
+    //     } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+    //         console.log("MapPage>categorySearchCB>검색결과없음");
+    //     } else if (status === daum.maps.services.Status.ERROR) {
+    //         console.log("MapPage>categorySearchCB>검색결과오류");
+    //     }
 
-        if(optionCnt === (optionApiCnt+1)){
-            console.log("같음 "+optionCnt+" "+(optionApiCnt+1)+"  "+data.length+"개 호출");
+    //     if(optionCnt === (optionApiCnt+1)){
+    //         console.log("같음 "+optionCnt+" "+(optionApiCnt+1)+"  "+data.length+"개 호출");
 
-            this.setState({
-                optionDataList: optionDataList
-            });
+    //         this.setState({
+    //             optionDataList: optionDataList
+    //         });
 
-            // 부모 컴포넌트로 전달
-            this.props.mapDataSet(this.state.mapInfo, this.state.optionDataList);
+    //         // 부모 컴포넌트로 전달
+    //         this.props.mapDataSet(this.state.mapInfo, this.state.optionDataList);
 
-        } else {
-            console.log("다름 "+optionCnt+" "+(optionApiCnt+1)+"  "+data.length+"개 호출");
+    //     } else {
+    //         console.log("다름 "+optionCnt+" "+(optionApiCnt+1)+"  "+data.length+"개 호출");
 
-            this.setState({
-                optionDataList: optionDataList,
-                optionApiCnt: optionApiCnt+1
-            });
-        }
-    }
+    //         this.setState({
+    //             optionDataList: optionDataList,
+    //             optionApiCnt: optionApiCnt+1
+    //         });
+    //     }
+    // }
 
     createMarker = (position, image) => {
         var marker = new daum.maps.Marker({
