@@ -100,8 +100,6 @@ class Search extends Component {
         this.setState({ loading : true});
     }
 
-    
-
     // MapPage에서 지정한 지도 좌표 (RightTop, LeftBottom)
     mapDataSet = async(mapData) => {
         console.log("Search>mapDataSet");
@@ -238,6 +236,7 @@ class Search extends Component {
 
 
     render() {
+        
         return(
             <div>
                 <div className="SearchDiv1">
@@ -248,6 +247,7 @@ class Search extends Component {
                     <div className="SearchDivL">
                         <MapPage mapData={this.state.mapData.center} 
                                  mapDataSet={this.mapDataSet} 
+                                 
                                  resultData={this.state.resultData}
                                  loading={this.state.loading} 
                                  optionData={this.state.optionData}/>
