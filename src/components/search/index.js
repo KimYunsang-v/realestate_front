@@ -1,4 +1,5 @@
 export {default as Search} from './Search';
+export {default as Search2} from './Search2';
 export {default as SearchPage} from './SearchPage';
 export {default as MapPage} from './map/MapPage';
 

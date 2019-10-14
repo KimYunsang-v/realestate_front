@@ -54,7 +54,7 @@ class SearchPage extends Component {
         this.keyPress = this.keyPress.bind(this);
     }
 
-    keyPress = (e) => {
+    keyPress = (e) =>  {
         if (e.key === 'Enter') {
             console.log('do validate');
             this.props.kakaoPlacesSearch(this.state.inputData);
