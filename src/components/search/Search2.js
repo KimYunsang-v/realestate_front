@@ -30,11 +30,13 @@ class Search2 extends Component {
 
     //SearchPage에서 검색
     //동으로 검색
-    searchData = (searchData) => {
+    searchData = async (searchData) => {
         console.log("Search>searchDataSet");
         //const {housingTypeData, dealTypeData, inputData, options} = data[0];
 
-        // this.kakaoPlacesSearch(searchData);
+        // this.kakaoPlacesSearch(searchData);        
+
+        
 
         this.setState({
             loading : true
@@ -59,7 +61,7 @@ class Search2 extends Component {
                 mapData : {
                     latitude: data[0].y,
                     longitude : data[0].x
-                }, 
+                },
                 date : date,
                 loading: false
             });

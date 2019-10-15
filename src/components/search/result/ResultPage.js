@@ -72,34 +72,39 @@ class ResultPage extends Component {
         );
         return (
             <div>
-                <div>
-                    <Dropdown
-                        options={this.state.houseoptions}
-                        placeholder="집 타입"
-                        search
-                        selection
-                        multiple
-                        allowAdditions
-                        onAddItem={this.handleAdditionHouseType}
-                        onChange={this.handleChangeHouseType}
-                        renderLabel={renderLabel}
-                    />
-                    
-                    <Dropdown
-                        options={this.state.dealoptions}
-                        placeholder="거래 타입"
-                        search
-                        selection
-                        multiple
-                        allowAdditions
-                        onAddItem={this.handleAdditionDealType}
-                        onChange={this.handleChangeDealType}
-                        renderLabel={renderLabel2}
-                    />
-                </div>
+                <Grid columns={2}>
+                <Grid.Row>
+                    <Grid.Column>
+                        <Dropdown
+                            options={this.state.houseoptions}
+                            placeholder="집 타입"
+                            search
+                            selection
+                            multiple
+                            allowAdditions
+                            onAddItem={this.handleAdditionHouseType}
+                            onChange={this.handleChangeHouseType}
+                            renderLabel={renderLabel}
+                        />
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Dropdown
+                            options={this.state.dealoptions}
+                            placeholder="거래 타입"
+                            search
+                            selection
+                            multiple
+                            allowAdditions
+                            onAddItem={this.handleAdditionDealType}
+                            onChange={this.handleChangeDealType}
+                            renderLabel={renderLabel2}
+                        />
+                    </Grid.Column>
+                </Grid.Row>
+                </Grid>
                 {/* 매물보여주는 div */}
                 <div className="dealTypeDiv">
-                    {list} 
+                    {list}
                 </div>
                 <div className="paginationDiv">
                     <Pagination items={items} onChangePage={onChangePage} />

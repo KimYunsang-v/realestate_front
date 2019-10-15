@@ -4,7 +4,7 @@ import SearchPage from './SearchPage';
 import MapPage from './map/MapPage';
 import ResultPage from './result/ResultPage';
 import '../pages/Page.css';
-import * as service from '../../lib/bulidingInfoApi'
+import * as service from '../../lib/searchApi'
 
 class Search extends Component {
     state = {
