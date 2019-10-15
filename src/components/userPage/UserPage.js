@@ -11,14 +11,17 @@ class UserPage extends Component {
         open: false,
         key:''
     }
+    
     handlechange = (input) => {
         this.setState({
             userpw: input.target.value
         })
     }
+
     closeConfigShow = (closeOnEscape, closeOnDimmerClick) => () => {
         this.setState({ closeOnEscape, closeOnDimmerClick, open: true })
     }
+
     close = () => this.setState({ open: false })
 
     componentDidMount() {
@@ -30,6 +33,7 @@ class UserPage extends Component {
             key:key
         })    
     }
+
     updateInfo = async() => {
         let data = []
         data.push({
@@ -48,6 +52,7 @@ class UserPage extends Component {
         console.log("dd",this.state)
 
     }
+    
     render() {
         const { open, closeOnEscape, closeOnDimmerClick } = this.state
         let userid = this.state.userid

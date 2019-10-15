@@ -83,20 +83,21 @@ class Search2 extends Component {
         
         return(
             <div>
-                <div className="SearchDiv1">
+                {/* <div className="SearchDiv1">
                     <SearchPage searchDataSet={this.searchDataSet}
                         kakaoPlacesSearch = {this.kakaoPlacesSearch}/>
-                </div>
+                </div> */}
                 <div className="SearchDiv1">
                     <div className="SearchDivL">
-                        <MapPage2 mapData={this.state.mapData} 
+                        <MapPage2 kakaoPlacesSearch = {this.kakaoPlacesSearch}
+                                mapData={this.state.mapData} 
                                  loading={this.state.loading}
                                  date = {this.state.date} />
                     </div>
                     <div className="SearchDivR">
-                        {/* <ResultPage resultData={this.state} 
+                        <ResultPage resultData={this.state} 
                                     //items={this.state.resultData.buliding}
-                                    onChangePage={this.onChangePage}/> */}
+                                    onChangePage={this.onChangePage}/>
                     </div>
                 </div>
             </div>

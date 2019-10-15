@@ -1,5 +1,6 @@
 /*global daum*/
 import React, {Component} from 'react';
+import { Input, Divider, Button, Dropdown, Popup, Grid, Image } from 'semantic-ui-react'
 import './MapPage.css';
 
 var map = null;
@@ -8,6 +9,7 @@ class MapPage2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            
             mapInfo: [] ,
             date : ''
         };
@@ -32,6 +34,19 @@ class MapPage2 extends Component {
             return true;
         }else {
             return  false; 
+        }
+    }
+
+    searchChange = (e) => {
+        this.setState({
+            inputData: e.target.value
+        });
+    }
+
+    keyPress = (e) =>  {
+        if (e.key === 'Enter') {
+            console.log('do validate');
+            this.props.kakaoPlacesSearch(this.state.inputData);
         }
     }
 
@@ -61,6 +76,10 @@ class MapPage2 extends Component {
 
         return (
             <div>
+                <div>
+                <Input size="big" icon='search' placeholder='지역이나 역명' onChange={this.searchChange} 
+                            value={this.state.inputSearch} onKeyDown={this.keyPress} />
+                </div>
                 {/* <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=52b39c47d2be0c937abcae9bafe0bd16"></script> */}
                 <div id="map" className="mapStyle">
                     {Loading}
