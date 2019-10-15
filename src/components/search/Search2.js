@@ -4,7 +4,7 @@ import SearchPage from './SearchPage';
 import MapPage2 from './map/mapPage2';
 import ResultPage from './result/ResultPage';
 import '../pages/Page.css';
-import * as service from '../../lib/bulidingInfoApi'
+import * as service from '../../lib/searchApi'
 
 class Search2 extends Component {
     state = {
@@ -21,7 +21,7 @@ class Search2 extends Component {
         },
         date : ''
     };
-    
+
     // default값으로 지도 보여주기
     componentDidMount() {
         console.log("Search>componentDidMount");
@@ -34,7 +34,7 @@ class Search2 extends Component {
         console.log("Search>searchDataSet");
         //const {housingTypeData, dealTypeData, inputData, options} = data[0];
 
-        this.kakaoPlacesSearch(searchData);
+        // this.kakaoPlacesSearch(searchData);
 
         this.setState({
             loading : true
@@ -44,9 +44,9 @@ class Search2 extends Component {
     //kakao 장소검색api 호출
     kakaoPlacesSearch = async (input) => {
         if(input !== ''){
-            var ps = new daum.maps.services.Places();  
-            await ps.keywordSearch(input, this.placesSearchCB);             
-        }        
+            var ps = new daum.maps.services.Places();
+            await ps.keywordSearch(input, this.placesSearchCB);
+        }
     }
 
     //kakao 장소검색api 콜백함수
@@ -71,7 +71,7 @@ class Search2 extends Component {
         } else if (status === daum.maps.services.Status.ERROR) {
             alert('검색 결과 중 오류가 발생했습니다.');
             return false;
-        }        
+        }
     }
 
     onChangePage = (pageOfItems) => {
