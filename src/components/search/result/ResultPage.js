@@ -6,15 +6,15 @@ import ResultList from './ResultList';
 import Pagination from './Pagination';
 
 const houseoptions = [
-    { key: 'APART', text: '아파트', value: 'APART' },
-    { key: 'OFFICETEL', text: '오피스텔', value: 'OFFICETEL' },
-    { key: 'HOUSE', text: '주택', value: 'HOUSE' },
+    { key: 'APART', text: '아파트', value: 'apart' },
+    { key: 'OFFICETEL', text: '오피스텔', value: 'officetel' },
+    { key: 'HOUSE', text: '주택', value: 'house' },
 ]
 
 const dealoptions = [
-    { key: 'LEASE', text: '전세', value: 'LEASE' },
-    { key: 'DEAL', text: '매매', value: 'DEAL' },
-    { key: 'MONTH', text: '월세', value: 'MONTH' },
+    { key: 'LEASE', text: '전세', value: 'charter' },
+    { key: 'DEAL', text: '매매', value: 'bargain' },
+    { key: 'MONTH', text: '월세', value: 'rent' },
 ]
 
 const renderLabel = label =>({
@@ -36,43 +36,72 @@ class ResultPage extends Component {
         super(props)
         this.state = {
             houseoptions,dealoptions,
+            housingType : 'apart',
+            dealType : 'bargain',
+            paging : 1
         }
     }
 
     //house
-    handleAdditionHouseType = (e, { value }) => {
-        this.setState({
-         houseoptions: [{ text: value, value }, ...this.state.options],
-        });
-    }
+    // handleAdditionHouseType = (e, { value }) => {
+    //     this.setState({
+    //      houseoptions: [{ text: value, value }, ...this.state.options],
+    //     });
+    // }
     
     handleChangeHouseType = (e, { value }) => {
-        this.setState({ currentValues: value,houses:value })
+        this.setState({ housingType : value })
     }
 
     //deal
-    handleAdditionDealType = (e, { value }) => {
-        this.setState({
-         dealoptions: [{ text: value, value }, ...this.state.options],
-        });
-    }
+    // handleAdditionDealType = (e, { value }) => {
+    //     this.setState({
+    //      dealoptions: [{ text: value, value }, ...this.state.options],
+    //     });
+    // }
+
 
     handleChangeDealType = (e, { value }) => {
-        this.setState({ currentValuesD: value,deals:value })
+        this.setState({ dealType : value })
+    }
+
+    clickSearchButton = ( ) => {
+        const data = {
+            'dealType' : this.state.dealType,
+            'housingType' : this.state.housingType,
+            'paging' : this.state.paging,
+            'address' : this.props.address
+        }
+
+        this.props.searchData(data);
     }
 
     render() {
-        const { pageOfItems } = this.props.resultData;
-        const { items,onChangePage } = this.props;
-        const list = pageOfItems.map(
-            info => (
-                <ResultList key={info.no}
-                    info={info} />
+        //const { pageOfItems } = this.props.resultData;
+        //const { items,onChangePage } = this.props;
+        // const list = pageOfItems.map(
+        //     info => (
+        //         <ResultList key={info.no}
+        //             info={info} />
+        //     )
+        // );
+        const { resultData }  = this.props;
+        //const dataList = [];
+        var dataList = '';
+
+        if(resultData){
+            dataList = resultData.map(
+                data => (
+                    <ResultList info = {data} />
+                )
             )
-        );
+        } else {
+            dataList = '데이터가 없습니다.'
+        }
+
         return (
             <div>
-                <Grid columns={2}>
+                <Grid columns={3}>
                 <Grid.Row>
                     <Grid.Column>
                         <Dropdown
@@ -80,9 +109,6 @@ class ResultPage extends Component {
                             placeholder="집 타입"
                             search
                             selection
-                            multiple
-                            allowAdditions
-                            onAddItem={this.handleAdditionHouseType}
                             onChange={this.handleChangeHouseType}
                             renderLabel={renderLabel}
                         />
@@ -93,21 +119,27 @@ class ResultPage extends Component {
                             placeholder="거래 타입"
                             search
                             selection
-                            multiple
-                            allowAdditions
-                            onAddItem={this.handleAdditionDealType}
                             onChange={this.handleChangeDealType}
                             renderLabel={renderLabel2}
                         />
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Button
+                        onClick = {this.clickSearchButton}
+                        >
+                            조회
+                        </Button>
+
                     </Grid.Column>
                 </Grid.Row>
                 </Grid>
                 {/* 매물보여주는 div */}
                 <div className="dealTypeDiv">
-                    {list}
+                    {/* {list} */}
+                    {dataList}                    
                 </div>
                 <div className="paginationDiv">
-                    <Pagination items={items} onChangePage={onChangePage} />
+                    {/* <Pagination items={items} onChangePage={onChangePage} /> */}
                 </div>
             </div>
         );

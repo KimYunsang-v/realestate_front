@@ -9,17 +9,13 @@ import * as service from '../../lib/searchApi'
 class Search2 extends Component {
     state = {
         loading: false,
-        pageOfItems:[],
-        searchData:{
-            dealTypeData:["MONTH"], //"LEASE", "DEAL", "MONTH",
-            housingTypeData:["OFFICETEL"], //"APART", "OFFICETEL", "HOUSE",
-            inputData:"서경대",
-            options:[]
-        }, mapData : {
+        mapData : {
             latitude: 0,
             longitude : 0
         },
-        date : ''
+        resultData : '',
+        date : '',
+        address : '역삼동',
     };
 
     // default값으로 지도 보여주기
@@ -36,7 +32,13 @@ class Search2 extends Component {
 
         // this.kakaoPlacesSearch(searchData);        
 
-        
+        console.log(searchData);
+
+        await service.getbuliding(searchData)
+        .then(result => {
+            console.log(result);
+            this.setState({ resultData : result });
+        });        
 
         this.setState({
             loading : true
@@ -49,13 +51,16 @@ class Search2 extends Component {
             var ps = new daum.maps.services.Places();
             await ps.keywordSearch(input, this.placesSearchCB);
         }
+
+        this.setState({
+            address : input
+        })
     }
 
     //kakao 장소검색api 콜백함수
     placesSearchCB = (data, status) => {
         if (status === daum.maps.services.Status.OK) {
             console.log("Search>placesSearchCB");
-            console.log(data);
             var date = new Date();
             this.setState({
                 mapData : {
@@ -78,7 +83,7 @@ class Search2 extends Component {
 
     onChangePage = (pageOfItems) => {
         // update state with new page of items
-        this.setState({ pageOfItems: pageOfItems });
+        this.setState({ pageOfItems : pageOfItems });
     }
 
     render() {
@@ -92,12 +97,14 @@ class Search2 extends Component {
                 <div className="SearchDiv1">
                     <div className="SearchDivL">
                         <MapPage2 kakaoPlacesSearch = {this.kakaoPlacesSearch}
-                                mapData={this.state.mapData} 
-                                 loading={this.state.loading}
+                                 mapData = {this.state.mapData} 
+                                 loading = {this.state.loading}
                                  date = {this.state.date} />
                     </div>
                     <div className="SearchDivR">
-                        <ResultPage resultData={this.state} 
+                        <ResultPage resultData = {this.state.resultData} 
+                                    searchData = {this.searchData}
+                                    address = {this.state.address}
                                     //items={this.state.resultData.buliding}
                                     onChangePage={this.onChangePage}/>
                     </div>
