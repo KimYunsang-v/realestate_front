@@ -5,6 +5,7 @@ import MapPage2 from './map/mapPage2';
 import ResultPage from './result/ResultPage';
 import '../pages/Page.css';
 import * as service from '../../lib/searchApi'
+import { Grid } from 'semantic-ui-react';
 
 class Search2 extends Component {
     state = {
@@ -87,29 +88,27 @@ class Search2 extends Component {
     }
 
     render() {
-        
         return(
-            <div>
-                {/* <div className="SearchDiv1">
-                    <SearchPage searchDataSet={this.searchDataSet}
-                        kakaoPlacesSearch = {this.kakaoPlacesSearch}/>
-                </div> */}
-                <div className="SearchDiv1">
-                    <div className="SearchDivL">
-                        <MapPage2 kakaoPlacesSearch = {this.kakaoPlacesSearch}
-                                 mapData = {this.state.mapData} 
-                                 loading = {this.state.loading}
-                                 date = {this.state.date} />
-                    </div>
-                    <div className="SearchDivR">
-                        <ResultPage resultData = {this.state.resultData} 
-                                    searchData = {this.searchData}
-                                    address = {this.state.address}
-                                    //items={this.state.resultData.buliding}
-                                    onChangePage={this.onChangePage}/>
-                    </div>
-                </div>
-            </div>
+
+                <Grid padded>
+                        <Grid.Column width={7}>
+                    
+                            <MapPage2 kakaoPlacesSearch = {this.kakaoPlacesSearch}
+                                    mapData = {this.state.mapData}
+                                    loading = {this.state.loading}
+                                    date = {this.state.date} />
+                        </Grid.Column>
+                        
+                        <Grid.Column width={9}>
+            
+                                <ResultPage resultData = {this.state.resultData} 
+                                            searchData = {this.searchData}
+                                            address = {this.state.address}
+                                            //items={this.state.resultData.buliding}
+                                            onChangePage={this.onChangePage}/>
+                            
+                        </Grid.Column>
+                </Grid>            
         )
     }
 }

@@ -24,6 +24,7 @@ class QuestionList extends Component {
             title: e.target.value
         });
     }
+
     inputChangeContents = (e) => {
         this.setState({
             contents: e.target.value
@@ -55,7 +56,7 @@ class QuestionList extends Component {
             <div>
             {/* 새로운 글 팝업 */}
                 <Button color='olive' onClick={this.closeConfigShow(false)}>글쓰기</Button>
-                <Modal 
+                <Modal
                     size='tiny'
                     open={open}
                     closeOnDimmerClick={closeOnDimmerClick}

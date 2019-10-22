@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
-import { Input, Divider, Button, Dropdown, Popup, Grid, Image } from 'semantic-ui-react'
+import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List } from 'semantic-ui-react'
 import ResultList from './ResultList';
 import Pagination from './Pagination';
 
@@ -100,48 +100,49 @@ class ResultPage extends Component {
         }
 
         return (
-            <div>
                 <Grid columns={3}>
-                <Grid.Row>
-                    <Grid.Column>
-                        <Dropdown
-                            options={this.state.houseoptions}
-                            placeholder="집 타입"
-                            search
-                            selection
-                            onChange={this.handleChangeHouseType}
-                            renderLabel={renderLabel}
-                        />
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Dropdown
-                            options={this.state.dealoptions}
-                            placeholder="거래 타입"
-                            search
-                            selection
-                            onChange={this.handleChangeDealType}
-                            renderLabel={renderLabel2}
-                        />
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Button
-                        onClick = {this.clickSearchButton}
-                        >
-                            조회
-                        </Button>
+                    <Grid.Row>
+                        <Grid.Column width={4}>
+                            <Dropdown
+                                options={this.state.houseoptions}
+                                placeholder="집 타입"
+                                search
+                                selection
+                                onChange={this.handleChangeHouseType}
+                                renderLabel={renderLabel}
+                            />
+                        </Grid.Column>
+                        <Grid.Column width={4}>
+                            <Dropdown
+                                options={this.state.dealoptions}
+                                placeholder="거래 타입"
+                                search
+                                selection
+                                onChange={this.handleChangeDealType}
+                                renderLabel={renderLabel2}
+                            />
+                        </Grid.Column>
+                        <Grid.Column width={2}>
+                            <Button
+                            onClick = {this.clickSearchButton}
+                            >
+                                조회
+                            </Button>
 
-                    </Grid.Column>
-                </Grid.Row>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column width={16}>
+                            <Segment raised style={{overflow: 'auto', height: 500 }}>
+                                <List divided relaxed>
+                                    {dataList}                
+                                </List>
+                            </Segment>
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
-                {/* 매물보여주는 div */}
-                <div className="dealTypeDiv">
-                    {/* {list} */}
-                    {dataList}                    
-                </div>
-                <div className="paginationDiv">
-                    {/* <Pagination items={items} onChangePage={onChangePage} /> */}
-                </div>
-            </div>
+                
+        
         );
     }
 }

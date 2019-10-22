@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Image, Segment, Label } from 'semantic-ui-react';
+import { Grid, Image, Segment, Label, List } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
 
@@ -38,24 +38,29 @@ class ResultList extends Component {
         }
 
         return (
-            <div>
-                <Segment raised>
-                    <Grid>
-                        <Grid.Column width={4}>
-                            <Image src={housingImage} />
-                        </Grid.Column>
-
-                        <Grid.Column width={9}>
-                        <Label circular>{dealType}</Label>
-                        <h2 className="title">
-                        {deposit?(<font color="orange">{deposit}/{price}</font>):(<font color="orange">{price}</font>)}
-                        </h2><h4 className="title">({area}㎡)</h4>
-                        <font color="grey"><h4>{address} {dong} {name} {floor}...</h4>
-                        <h4>{type}</h4></font>
-                        </Grid.Column>
-                    </Grid>
-                </Segment>
-            </div>
+                
+            <List.Item style={{height: 100 }}>
+                {/* <Grid.Column width={4}>
+                    
+                </Grid.Column> */}
+                <List.Icon size='large' verticalAlign='middle' src={housingImage} />
+                <List.Header>
+                    <font color="grey"><h4>{address} {dong} {name}  {floor}층 </h4></font>
+                    
+                </List.Header>
+                <List.Content>
+                    {deposit?(<font color="orange">{deposit}/{price}</font>):(<font color="orange">{price}</font>)}만원
+                    <h4 className="title">({area}㎡)</h4>
+                </List.Content>
+                <Grid.Column width={9}>
+                {/* <Label circular>{dealType}</Label> */}   
+                    
+                    
+                    
+                </Grid.Column>
+            </List.Item>
+            
+            
         );
     }
 }
