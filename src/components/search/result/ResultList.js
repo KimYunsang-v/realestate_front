@@ -25,7 +25,15 @@ class ResultList extends Component {
             deposit: 'deposit',
             dealType: 'dealType',
         },
-      }
+    }
+
+    itemClickListener = () => {
+        const {dong, name} = this.props.info;
+
+        this.props.selectedBuildingListener(dong + " " + name);
+    }
+
+
     render() {
         const {address, dong, name, area, floor, type, price, deposit, dealType} = this.props.info
         var housingImage= ''
@@ -39,7 +47,7 @@ class ResultList extends Component {
 
         return (
                 
-            <List.Item style={{height: 100 }}>
+            <List.Item style={{height: 100 }} onClick={this.itemClickListener}>
                 {/* <Grid.Column width={4}>
                     
                 </Grid.Column> */}

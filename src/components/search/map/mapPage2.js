@@ -32,6 +32,7 @@ class MapPage2 extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
+        console.log("shouldComponentUpdate");
         if(this.props.date !== nextProps.date){
             return true;
         }else {
@@ -39,9 +40,19 @@ class MapPage2 extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps){
-        if(this.props.selectedBuilding != nextProps.selectedBuilding){
-            this.props.kakaoPlacesSearch(this.state.inputData);
+    componentWillReceiveProps(nextProps){        
+        console.log("componentWillReceiveProps");
+        if(this.props.selectedBuilding != nextProps.selectedBuilding){            
+            // 마커가 표시될 위치입니다 
+            const { latitude, longitude } = nextProps.mapData;
+            var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
+
+            // 마커를 생성합니다
+            var marker = new daum.maps.Marker({
+                position: markerPosition
+            });
+
+            marker.setMap(map);
         }
     }
 
@@ -87,7 +98,7 @@ class MapPage2 extends Component {
 
         return (
             <Segment basic>
-                <Segment.Group basic horizontal style = {{ marginTop : 0 }}>
+                <Segment.Group horizontal style = {{ marginTop : 0 }}>
                     <Segment basic floated="left" >
                         <Input style={{ width : 350}} icon='search' placeholder='지역이나 역명' onChange={this.searchChange} 
                                     value={this.state.inputSearch} onKeyDown={this.keyPress} />

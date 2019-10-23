@@ -16,7 +16,7 @@ class Search2 extends Component {
         },
         resultData : '',
         date : '',
-        address : '역삼동',
+        address : '정릉동',
         selectedBuilding : ''
     };
 
@@ -51,11 +51,13 @@ class Search2 extends Component {
         });
     }
 
-    selectedBuildingEvent = (data) => {
-        this.kakaoPlacesSearch(data);
-        // this.setState({
-        //     selectedBuilding : data
-        // })
+    selectedBuildingListener = async (data) => {
+        var ps = new daum.maps.services.Places();
+        await ps.keywordSearch(data, this.placesSearchCB);
+
+        this.setState({
+            selectedBuilding : data
+        })
     }
 
     //kakao 장소검색api 호출
@@ -117,7 +119,8 @@ class Search2 extends Component {
                                             searchData = {this.searchData}
                                             address = {this.state.address}
                                             //items={this.state.resultData.buliding}
-                                            onChangePage={this.onChangePage}/>
+                                            onChangePage={this.onChangePage}
+                                            selectedBuildingListener = {this.selectedBuildingListener}/>
                             
                         </Grid.Column>
                 </Grid>            

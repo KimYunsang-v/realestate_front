@@ -92,19 +92,18 @@ class ResultPage extends Component {
 
         if(resultData){
             dataList = resultData.map(
-                data => (
-                    
-                            <ResultList info = {data} />
-                        
+                (data,key) => (                    
+                    <ResultList key={key} info = {data} selectedBuildingListener = {this.props.selectedBuildingListener}/>                        
                 )
             )
         } 
 
         var resultSegment = '';
+
         if(dataList.length != 0){
             resultSegment = (
                 <Segment raised style={{overflow: 'auto', height: 500 }}>
-                    <List divided relaxed> {dataList} </List>                        
+                    <List selection divided relaxed> {dataList} </List>                        
                 </Segment>    
             )
         }
