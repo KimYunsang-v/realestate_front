@@ -17,7 +17,12 @@ class Search2 extends Component {
         resultData : '',
         date : '',
         address : '역삼동',
+        selectedBuilding : ''
     };
+
+    // constructor(){
+    //     this.searchData('정릉동');
+    // }
 
     // default값으로 지도 보여주기
     componentDidMount() {
@@ -44,6 +49,13 @@ class Search2 extends Component {
         this.setState({
             loading : true
         });
+    }
+
+    selectedBuildingEvent = (data) => {
+        this.kakaoPlacesSearch(data);
+        // this.setState({
+        //     selectedBuilding : data
+        // })
     }
 
     //kakao 장소검색api 호출
@@ -89,14 +101,14 @@ class Search2 extends Component {
 
     render() {
         return(
-
                 <Grid padded>
                         <Grid.Column width={7}>
                     
                             <MapPage2 kakaoPlacesSearch = {this.kakaoPlacesSearch}
                                     mapData = {this.state.mapData}
                                     loading = {this.state.loading}
-                                    date = {this.state.date} />
+                                    date = {this.state.date}
+                                    selectedBuilding = {this.state.selectedBuilding} />
                         </Grid.Column>
                         
                         <Grid.Column width={9}>

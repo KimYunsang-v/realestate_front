@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
-import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List } from 'semantic-ui-react'
+import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon } from 'semantic-ui-react'
 import ResultList from './ResultList';
+import noData from '../../../image/noData.png'
 import Pagination from './Pagination';
 
 const houseoptions = [
@@ -92,56 +93,61 @@ class ResultPage extends Component {
         if(resultData){
             dataList = resultData.map(
                 data => (
-                    <ResultList info = {data} />
+                    
+                            <ResultList info = {data} />
+                        
                 )
             )
-        } else {
-            dataList = '데이터가 없습니다.'
+        } 
+
+        var resultSegment = '';
+        if(dataList.length != 0){
+            resultSegment = (
+                <Segment raised style={{overflow: 'auto', height: 500 }}>
+                    <List divided relaxed> {dataList} </List>                        
+                </Segment>    
+            )
+        }
+        else {
+            resultSegment = (
+                <Segment placeholder piled style={{ height: 500, marginTop:20 }}>
+                    {/* <Image src={noData} size='small'/> */}
+                    <Header icon>
+                        <Icon name='search'/>
+                        데이터가 없습니다. 
+                    </Header>
+                </Segment>
+            )
         }
 
         return (
-                <Grid columns={3}>
-                    <Grid.Row>
-                        <Grid.Column width={4}>
-                            <Dropdown
-                                options={this.state.houseoptions}
-                                placeholder="집 타입"
-                                search
-                                selection
-                                onChange={this.handleChangeHouseType}
-                                renderLabel={renderLabel}
-                            />
-                        </Grid.Column>
-                        <Grid.Column width={4}>
-                            <Dropdown
-                                options={this.state.dealoptions}
-                                placeholder="거래 타입"
-                                search
-                                selection
-                                onChange={this.handleChangeDealType}
-                                renderLabel={renderLabel2}
-                            />
-                        </Grid.Column>
-                        <Grid.Column width={2}>
-                            <Button
-                            onClick = {this.clickSearchButton}
-                            >
-                                조회
-                            </Button>
-
-                        </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column width={16}>
-                            <Segment raised style={{overflow: 'auto', height: 500 }}>
-                                <List divided relaxed>
-                                    {dataList}                
-                                </List>
-                            </Segment>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
+            <Segment basic>
+                <Segment>
+                    <Dropdown
+                        options={this.state.houseoptions}
+                        placeholder="집 타입"
+                        search
+                        selection
+                        onChange={this.handleChangeHouseType}
+                        renderLabel={renderLabel}
+                    />
                 
+                
+                    <Dropdown
+                        options={this.state.dealoptions}
+                        placeholder="거래 타입"
+                        search
+                        selection
+                        onChange={this.handleChangeDealType}
+                        renderLabel={renderLabel2}
+                    />
+                
+                
+                    <Button onClick = {this.clickSearchButton} > 조회 </Button>
+                    </Segment>                   
+                    
+                    {resultSegment}   
+            </Segment>
         
         );
     }
