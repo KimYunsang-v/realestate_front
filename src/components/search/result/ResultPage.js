@@ -13,8 +13,8 @@ const houseoptions = [
 ]
 
 const dealoptions = [
-    { key: 'LEASE', text: '전세', value: 'charter' },
     { key: 'DEAL', text: '매매', value: 'bargain' },
+    { key: 'LEASE', text: '전세', value: 'charter' },    
     { key: 'MONTH', text: '월세', value: 'rent' },
 ]
 
@@ -74,7 +74,7 @@ class ResultPage extends Component {
             'address' : this.props.address
         }
 
-        this.props.searchData(data);
+        this.props.searchDataListener(data);
     }
 
     render() {
@@ -87,6 +87,9 @@ class ResultPage extends Component {
         //     )
         // );
         const { resultData }  = this.props;
+
+        console.log("result page rendering")
+
         //const dataList = [];
         var dataList = '';
 
@@ -96,7 +99,7 @@ class ResultPage extends Component {
                     <ResultList key={key} info = {data} selectedBuildingListener = {this.props.selectedBuildingListener}/>                        
                 )
             )
-        } 
+        }
 
         var resultSegment = '';
 
@@ -125,16 +128,17 @@ class ResultPage extends Component {
                     <Dropdown
                         options={this.state.houseoptions}
                         placeholder="집 타입"
+                        // defaultValue = {this.state.houseoptions[0].text}
                         search
                         selection
                         onChange={this.handleChangeHouseType}
                         renderLabel={renderLabel}
                     />
-                
-                
+                                
                     <Dropdown
                         options={this.state.dealoptions}
                         placeholder="거래 타입"
+                        // defaultValue = {this.state.dealoptions[0].text}
                         search
                         selection
                         onChange={this.handleChangeDealType}
