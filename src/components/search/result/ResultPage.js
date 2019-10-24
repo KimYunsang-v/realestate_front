@@ -61,7 +61,6 @@ class ResultPage extends Component {
     //     });
     // }
 
-
     handleChangeDealType = (e, { value }) => {
         this.setState({ dealType : value })
     }

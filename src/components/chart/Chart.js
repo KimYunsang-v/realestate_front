@@ -1,72 +1,105 @@
-import React, { Component } from 'react';
-import ChartItem from './ChartItem';
-import {Grid, Segment, GridColumn} from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
+import React,{Component} from 'react';
+import SelectPage from './SelectPage';
+import ChartsPage from './ChartPage';
+import * as service from '../../lib/chartDataApi';
+import '../pages/Page.css';
 
-class Chart extends Component {
-    render() {
-        // 조건 및 결과 데이터
-        const {conditionData} = this.props;
-
-        console.log(conditionData)
-
-        const style = {
-            padding:'1rem'
-        };
-        var dealtype='';
-        var housingtype='';
-        var bargainApart = {}, bargainOfficetel = {}, bargainHouse = {}, charterApart = {}, charterOfficetel = {}, charterHouse = {}
-                ,rentApart = {}, rentOfficetel = {}, rentHouse = {};
-        var i = 0;
-
-        for(i=0;i<9;i++){
-            if(conditionData.result[i]!==undefined){
-                dealtype=conditionData.result[i].dealType;
-                housingtype=conditionData.result[i].housingType;                
-
-                if(dealtype === 'bargain'){
-                    if(housingtype === 'apart'){
-                        bargainApart = conditionData.result[i].average;
-                    }else if(housingtype === 'house'){
-                        bargainHouse = conditionData.result[i].average;
-                    }else{
-                        bargainOfficetel = conditionData.result[i].average;
-                    }
-                }else if(dealtype === 'charter'){
-                    if(housingtype === 'apart'){
-                        charterApart = conditionData.result[i].average;
-                    }else if(housingtype === 'house'){
-                        charterHouse = conditionData.result[i].average;
-                    }else{
-                        charterOfficetel = conditionData.result[i].average;
-                    }
-                }else{
-                    if(housingtype === 'apart'){
-                        rentApart = conditionData.result[i].average;
-                    }else if(housingtype === 'house'){
-                        rentOfficetel = conditionData.result[i].average;
-                    }else{
-                        rentHouse = conditionData.result[i].average;
-                    }
-                }
-            }
+class Chart extends Component{
+    state = {
+        condition: {
+            city: '',
+            district: '',
+            neighborhood: '',
+            year: '',
+            month: '',
+            result: '',
         }
+    };
 
-        return (
-            <div style={style}>
-                <Segment>
-                    <Grid columns={3} relaxed='very'>
-                        <GridColumn>
-                            <ChartItem title={"매매"} apart={bargainApart} officetel={bargainOfficetel}  house = {bargainHouse}/>
-                        </GridColumn>
-                        <GridColumn>
-                            <ChartItem title={"전세"} apart={charterApart} officetel={charterOfficetel} house = {charterHouse}/>
-                        </GridColumn>
-                        <GridColumn>
-                            <ChartItem title={"월세"} apart={rentApart} officetel={rentOfficetel} house = {rentHouse} />
-                        </GridColumn>
-                    </Grid>
-                </Segment>
+    componentDidMount() {
+        let data = [];
+        data.push({
+            city: '서울특별시',
+            district: '',
+            neighborhood: '',
+            year: '',
+            month: '' 
+        });
+        this.changeConditionData(data);
+    }
+
+    // SelectPage 컴포넌트에서 받은 데이터 state에 저장
+    changeConditionData = async (data) => {
+        try {
+            const {city, district, neighborhood, year, month} = data[0];
+            var date = "";
+
+            if(month) {
+                date = year+"-"+month;
+            }else {
+                date = year;
+            }
+            var groop = district.replace(" ","")
+            
+            var info = null;
+      
+            if(city === "세종특별자치시" && neighborhood && date ){
+                console.log("세종getCityAndNeighborhoodAndDate");
+                info = await service.getCityAndNeighborhoodAndDate(city, neighborhood, date);
+            }
+            else if(city === "세종특별자치시" && neighborhood){
+                console.log("세종getCityAndNeighborhood");
+                info = await service.getCityAndNeighborhood(city, neighborhood);
+            }
+            else if(city && groop && neighborhood && date ){
+                console.log("getCityAndDistrictAndNeighborhoodAndDate");
+                info = await service.getCityAndDistrictAndNeighborhoodAndDate(city, groop, neighborhood, date);
+            }
+            else if (city && groop && neighborhood ) {
+                console.log("getCityAndDistrictAndNeighborhood");
+                info = await service.getCityAndDistrictAndNeighborhood(city, groop, neighborhood);
+            }
+            else if (city  && groop && date) {
+                console.log("getCityAndDistrictAndDate");
+                info = await service.getCityAndDistrictAndDate(city, groop, date);
+            }
+            else if (city && groop) {
+                console.log("getCityAndDistrict");
+                info = await service.getCityAndDistrict(city, groop);
+            }
+            else if (city && date) {
+                console.log("getCityAndDate");
+                info = await service.getCityAndDate(city, date);
+            }
+            else if (city) {
+                console.log("getOnlyCity");
+                info = await service.getOnlyCity(city);
+            }
+            
+            this.setState({
+                condition: {
+                    city: city,
+                    district: district,
+                    neighborhood: neighborhood,
+                    year: year,
+                    month: month,
+                    result: info.data
+                }
+            });
+        }catch(e) {
+            console.log(e);
+        }
+    }
+
+    render(){
+        return(
+            <div>
+                <div className="HomeStyle1">
+                    <SelectPage changeConditionData={this.changeConditionData}/>
+                </div>
+                <div className="HomeStyle2">
+                    <ChartsPage conditionData={this.state.condition}/>
+                </div>
             </div>
         );
     }
