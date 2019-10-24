@@ -60,7 +60,7 @@ class LoginPage extends Component {
     const isLogin = this.props.isLogin;
 
     return (
-      <div>
+      <div> 
         {isLogin ? (
           <div>
             <h1>환영합니다.</h1>
@@ -68,7 +68,7 @@ class LoginPage extends Component {
             <Button color='olive' onClick={this.logoutBtn}>로그아웃</Button>
           </div>
         ) : (
-          <div className='login-form'>
+          <div className='login-form' >
             <style>{`
                   body > div,
                   body > div > div,

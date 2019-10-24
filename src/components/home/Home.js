@@ -14,6 +14,17 @@ import {
     Sidebar,
     Visibility,
   } from 'semantic-ui-react'
+import homeBackGround from '../../image/home_image.jpg'
+import LoginForm from '../login/LoginPage'
+
+
+
+  var sectionStyle = {
+    width: "100%",
+    height: "650px",
+    backgroundImage: `url(${homeBackGround})`,
+    
+  };
 
 class Home extends Component{
 
@@ -27,27 +38,12 @@ class Home extends Component{
         const { fixed } = this.state
 
         return(
-            <Container text>
-                <Header
-                    as='h1'
-                    content='Imagine-a-Company'
-                    style={{
-                    fontWeight: 'normal',
-                    marginBottom: 0,
-                    }}
-                />
-                <Header
-                    as='h2'
-                    content='Do whatever you want when you want to.'
-                    style={{
-                    fontWeight: 'normal',
-                    }}
-                />
-                <Button primary size='huge'>
-                    Get Started
-                    <Icon name='right arrow' />
-                </Button>
-            </Container>
+            <section style={sectionStyle}>
+                <Segment style={{width : 300, float: "right", marginTop: 100, marginRight: 50, }} >
+                <LoginForm   style={{opacity: 0.5}}> </LoginForm>
+                </Segment>
+                
+            </section>
         );
     }
 }
