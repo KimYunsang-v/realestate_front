@@ -3,20 +3,32 @@ import { Route, Switch } from 'react-router-dom';
 import {Chart} from '../components/chart'
 import {Home} from '../components/home'
 import {Search} from '../components/search'
-import {Question, Login, Menu} from 'components/pages';
+import {Question, Menu} from 'components/pages';
+import Login from 'components/login/Login'
 
 class App extends Component {
+
+    state = {
+        token : ''
+    }
+
+    setToken = (token) => {
+        this.setState({
+            token : token
+        })
+    }
+
     render() {
         return (
             <div>
                 <Menu/>
-                <Route exact path="/" component={Home}/>
+                <Route exact path="/" component={Home} setToken={this.setToken}/>
                 <Switch>
                     {/* <Route path="/search/:name" component={Search}/> */}
                     <Route path="/chart" component={Chart}/>
                     <Route path="/search" component={Search}/>
-                    <Route path="/question" component={Question}/>
-                    <Route path="/login" component={Login}/>
+                    <Route path="/question" component={Question} token={this.state.token}/>
+                    <Route path="/login" component={Login} setToken={this.setToken}/>
                 </Switch>
             </div>
         );

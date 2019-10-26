@@ -15,9 +15,7 @@ import {
     Visibility,
   } from 'semantic-ui-react'
 import homeBackGround from '../../image/home_image.jpg'
-import LoginForm from '../login/LoginPage'
-
-
+import Login from '../login/Login'
 
   var sectionStyle = {
     width: "100%",
@@ -33,17 +31,15 @@ class Home extends Component{
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
 
-
     render(){
         const { fixed } = this.state
 
         return(
-            <section style={sectionStyle}>
-                <Segment style={{width : 300, float: "right", marginTop: 100, marginRight: 50, }} >
-                <LoginForm   style={{opacity: 0.5}}> </LoginForm>
+            <Segment style={sectionStyle}>
+                <Segment style={{width : 300, float: "right", marginTop: 100, marginRight: 50}} >
+                  <Login > </Login>
                 </Segment>
-                
-            </section>
+            </Segment>
         );
     }
 }

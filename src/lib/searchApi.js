@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const url = "http://localhost:8080";
+import baseUrl from 'util';
 
 // export function getbuliding(city) {
 //     return axios.get(`${url}/realestate/search/${city}`);
@@ -8,7 +7,7 @@ const url = "http://localhost:8080";
 
 
 export function getbuliding(data) {
-    return axios.post(`${url}/realestate/search`, data)
+    return axios.post(`${baseUrl}/realestate/search`, data)
     .then( response => { 
         console.log(response.data);
         return response.data;

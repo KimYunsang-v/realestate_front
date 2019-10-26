@@ -14,6 +14,7 @@ class LoginPage extends Component {
   closeConfigShow = (closeOnEscape, closeOnDimmerClick) => () => {
     this.setState({ closeOnEscape, closeOnDimmerClick, open: true })
   }
+  
   close = () => this.setState({ open: false })
 
   handlechange = (input) => {
@@ -60,7 +61,7 @@ class LoginPage extends Component {
     const isLogin = this.props.isLogin;
 
     return (
-      <div> 
+      <div>
         {isLogin ? (
           <div>
             <h1>환영합니다.</h1>
@@ -79,7 +80,7 @@ class LoginPage extends Component {
               <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' color='teal' textAlign='center'>
                   로그인
-                    </Header>
+                </Header>
                 <Form size='large'>
                   <Segment stacked>
                     <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'
