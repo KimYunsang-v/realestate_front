@@ -121,8 +121,8 @@ class Pagination extends Component {
                         <Icon name='angle left' onClick={() => this.setPage(pager.currentPage - 1)}/>
                     </Menu.Item>                  
                     {pager.pages.map((page, index) =>
-                        <Menu.Item 
-                            as='a' 
+                        <Menu.Item
+                            as='a'
                             key={index} 
                             className={pager.currentPage === page ? 'active' : ''} 
                             onClick={() => this.setPage(page)}

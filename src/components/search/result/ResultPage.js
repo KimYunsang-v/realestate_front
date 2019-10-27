@@ -89,16 +89,17 @@ class ResultPage extends Component {
 
         console.log("result page rendering")
 
+        console.log(resultData)
         //const dataList = [];
         var dataList = '';
 
-        if(resultData){
-            dataList = resultData.map(
-                (data,key) => (                    
-                    <ResultList key={key} info = {data} selectedBuildingListener = {this.props.selectedBuildingListener}/>                        
-                )
-            )
-        }
+        // if(resultData['buildingDtoList']){
+        //     dataList = resultData.map(
+        //         (data,key) => (                    
+        //             <ResultList key={key} info = {data} selectedBuildingListener = {this.props.selectedBuildingListener}/>                        
+        //         )
+        //     )
+        // }
 
         var resultSegment = '';
 

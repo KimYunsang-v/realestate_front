@@ -1,5 +1,7 @@
 import axios from 'axios';
-import baseUrl from 'util';
+
+
+const baseUrl = "http://localhost:8080";
 
 export function getOnlyCity(city) {
     return axios.get(`${baseUrl}/realestate/graph/city/${city}`);

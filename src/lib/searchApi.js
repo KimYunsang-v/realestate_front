@@ -1,5 +1,9 @@
 import axios from 'axios';
-import baseUrl from 'util';
+
+
+const baseUrl = "http://localhost:8080";
+
+
 
 // export function getbuliding(city) {
 //     return axios.get(`${url}/realestate/search/${city}`);

@@ -1,5 +1,7 @@
 import axios from 'axios';
-import baseUrl from 'util';
+
+
+const baseUrl = "http://localhost:8080";
 
 export function getBoard() {
     return axios.get(`${baseUrl}/realestate/board`);
