@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Comment, Button } from 'semantic-ui-react';
 
+
 class detailPage extends Component {
     _isMounted = false
     state = {
@@ -26,8 +27,12 @@ class detailPage extends Component {
             })
         }
     }
+
+
+
     render() {
         return (
+            
             <Table>
                 <Table.Header>
                     {this.title}

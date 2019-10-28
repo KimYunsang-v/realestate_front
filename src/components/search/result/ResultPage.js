@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
-import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon } from 'semantic-ui-react'
+import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon, Pagination } from 'semantic-ui-react'
 import ResultList from './ResultList';
 import noData from '../../../image/noData.png'
-import Pagination from './Pagination';
+// import Pagination from './Pagination';
 
 const houseoptions = [
     { key: 'APART', text: '아파트', value: 'apart' },
@@ -76,6 +76,20 @@ class ResultPage extends Component {
         this.props.searchDataListener(data);
     }
 
+    pageChangeListener = (e, { activePage }) => {
+        console.log(e);
+        this.setState({paging : activePage})
+
+        const data = {
+            'dealType' : this.state.dealType,
+            'housingType' : this.state.housingType,
+            'paging' : activePage,
+            'address' : this.props.address
+        }
+
+        this.props.searchDataListener(data);
+    }
+
     render() {
         //const { pageOfItems } = this.props.resultData;
         //const { items,onChangePage } = this.props;
@@ -87,27 +101,28 @@ class ResultPage extends Component {
         // );
         const { resultData }  = this.props;
 
+        const {paging} = this.state.paging
         console.log("result page rendering")
 
         console.log(resultData)
         //const dataList = [];
         var dataList = '';
 
-        // if(resultData['buildingDtoList']){
-        //     dataList = resultData.map(
-        //         (data,key) => (                    
-        //             <ResultList key={key} info = {data} selectedBuildingListener = {this.props.selectedBuildingListener}/>                        
-        //         )
-        //     )
-        // }
+        if(resultData){
+            dataList = resultData.map(
+                (data,key) => (                    
+                    <ResultList key={key} info = {data} selectedBuildingListener = {this.props.selectedBuildingListener}/>                        
+                )
+            )
+        }
 
         var resultSegment = '';
 
         if(dataList.length != 0){
             resultSegment = (
                 <Segment raised style={{overflow: 'auto', height: 500 }}>
-                    <List selection divided relaxed> {dataList} </List>                        
-                </Segment>    
+                    <List selection divided relaxed> {dataList} </List>                           
+                </Segment>
             )
         }
         else {
@@ -116,7 +131,7 @@ class ResultPage extends Component {
                     {/* <Image src={noData} size='small'/> */}
                     <Header icon>
                         <Icon name='search'/>
-                        데이터가 없습니다. 
+                        데이터가 없습니다.
                     </Header>
                 </Segment>
             )
@@ -147,9 +162,16 @@ class ResultPage extends Component {
                 
                 
                     <Button onClick = {this.clickSearchButton} > 조회 </Button>
-                    </Segment>                   
-                    
-                    {resultSegment}   
+                    </Segment>
+                    {resultSegment}  
+
+                    <Pagination
+                        activePage={paging}
+                        totalPages= {10}
+                        siblingRange={1}
+                        onPageChange={this.pageChangeListener}
+                    />
+
             </Segment>
         
         );

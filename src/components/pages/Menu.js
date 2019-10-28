@@ -38,27 +38,27 @@ class Navigator extends Component {
                             {/* </NavLink> */}
 
                             <NavLink exact to="/"> 
-                                <Menu.Item as='a' name='home' active={activeItem === 'home'} onClick={this.handleItemClick} position='right'>
+                                <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} position='right'>
                                     Home                                    
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/chart"> 
-                                <Menu.Item as='a' name='chart' style={{margin:0, textlAlign: 'bottom'}} active={activeItem === 'chart'} onClick={this.handleItemClick} position='right'>                                     
+                                <Menu.Item name='chart' style={{margin:0, textlAlign: 'bottom'}} active={activeItem === 'chart'} onClick={this.handleItemClick} position='right'>                                     
                                     차트                    
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/search">  
-                                <Menu.Item as='a'  name='search' style={{margin:0}} active={activeItem === 'search'} onClick={this.handleItemClick} position='right'>
+                                <Menu.Item  name='search' style={{margin:0}} active={activeItem === 'search'} onClick={this.handleItemClick} position='right'>
                                     검색                                    
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/question">
-                                <Menu.Item as='a' name='question' style={{margin:0}} active={activeItem === 'question'} onClick={this.handleItemClick} position='right'>                                    
+                                <Menu.Item name='question' style={{margin:0}} active={activeItem === 'question'} onClick={this.handleItemClick} position='right'>                                    
                                     질문                                    
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/login" style={{marginRight: 150}}>
-                                <Menu.Item as='a' name='login' style={{margin:0}} active={activeItem === 'login'} onClick={this.handleItemClick} position='right'>                                
+                                <Menu.Item  name='login' style={{margin:0}} active={activeItem === 'login'} onClick={this.handleItemClick} position='right'>                                
                                      로그인                                    
                                 </Menu.Item>
                             </NavLink>
