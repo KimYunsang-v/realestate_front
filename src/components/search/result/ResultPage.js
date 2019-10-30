@@ -165,12 +165,12 @@ class ResultPage extends Component {
                     </Segment>
                     {resultSegment}  
 
-                    <Pagination
+                    {/* <Pagination
                         activePage={paging}
                         totalPages= {10}
                         siblingRange={1}
                         onPageChange={this.pageChangeListener}
-                    />
+                    /> */}
 
             </Segment>
         

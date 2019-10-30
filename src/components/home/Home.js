@@ -22,7 +22,7 @@ import Login from '../login/Login'
     width: "100%",
     height: "650px",
     backgroundImage: `url(${homeBackGround})`,
-    
+    marginTop : 0
   };
 
 class Home extends Component{
@@ -36,36 +36,11 @@ class Home extends Component{
         const { fixed } = this.state
 
         return(
-            <Segment>
-            {/* // <Segment style={sectionStyle}> */}
-                <Grid columns={2}>
-                  <Grid.Column>
-                    <Grid.Row>
-                      <Segment>
-                        차트 보러가자!
-                      </Segment>
-                    </Grid.Row>
-                    <Grid.Row>
-                    <Segment>
-                        검색 하러가자!
-                      </Segment>
-                    </Grid.Row>
-                    <Grid.Row>
-                    <Segment>
-                        질문 하러가자!
-                      </Segment>
-                    </Grid.Row>
-                  </Grid.Column>
-
-                  <Grid.Column>
-                  <Login > </Login>  
-
-                  </Grid.Column>
-                </Grid>
-                  {/* <Segment style={{width : 300, float: "right", marginTop: 100, marginRight: 50}} >
-                  <Login > </Login>
-                </Segment> */}
-            </Segment>
+                <Segment style={sectionStyle} floated={"left"}>
+                  <Segment style={{width : 350, height: 450,float: "right", marginTop: 100, marginRight: 50}} >
+                    <Login > </Login>
+                  </Segment>
+                </Segment>
         );
     }
 }

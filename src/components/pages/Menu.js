@@ -39,22 +39,22 @@ class Navigator extends Component {
 
                             <NavLink exact to="/"> 
                                 <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} position='right'>
-                                    Home                                    
+                                    Home       
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/chart"> 
                                 <Menu.Item name='chart' style={{margin:0, textlAlign: 'bottom'}} active={activeItem === 'chart'} onClick={this.handleItemClick} position='right'>                                     
-                                    차트                    
+                                    시세          
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/search">  
                                 <Menu.Item  name='search' style={{margin:0}} active={activeItem === 'search'} onClick={this.handleItemClick} position='right'>
-                                    검색                                    
+                                    거래 매물                                  
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/question">
                                 <Menu.Item name='question' style={{margin:0}} active={activeItem === 'question'} onClick={this.handleItemClick} position='right'>                                    
-                                    질문                                    
+                                    커뮤니티                                    
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/login" style={{marginRight: 150}}>

@@ -144,7 +144,7 @@ export const neighborhood = (value1, value2) => {
     return neighborhoodData;
 } 
 
-const neighborhoodInfo = [
+export const neighborhoodInfo = [
     ["서울특별시","종로구","사직동"],
     ["서울특별시","종로구","삼청동"],
     ["서울특별시","종로구","부암동"],

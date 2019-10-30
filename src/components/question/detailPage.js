@@ -9,14 +9,17 @@ class detailPage extends Component {
         content: '',
         
     }
+
     componentDidMount() {
        // this.setData()
         this._isMounted = true
     }
+
     componentWillUnmount() {
         this._isMounted = false
         this.setData()
     }
+    
     setData = () => {
         const detailBoardItems = this.props
         console.log(detailBoardItems)
@@ -27,8 +30,6 @@ class detailPage extends Component {
             })
         }
     }
-
-
 
     render() {
         return (

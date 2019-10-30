@@ -50,7 +50,7 @@ class MapPage extends Component {
         if(this.props.markerData !== nextProps.markerData && this.props.searchData === nextProps.searchData){            
             console.log("componentWillUpdate --- 마커찍자 ");
             console.log(nextProps)
-            // 마커가 표시될 위치입니다 
+            // 마커가 표시될 위치입니다
             const { latitude, longitude } = nextProps.markerData;
             var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
 
@@ -65,7 +65,11 @@ class MapPage extends Component {
             console.log("componentWillUpdate --- 검색 ");
             console.log(nextProps)
             const { latitude, longitude } = nextProps.searchData;
-            var bounds  = new daum.maps.LatLng(latitude, longitude); 
+            if(latitude === 0){
+                var bounds  = new daum.maps.LatLng(37.615095,127.0109226); 
+            }else {
+                var bounds  = new daum.maps.LatLng(latitude, longitude); 
+            }            
             map.setCenter(bounds);
         }
     }
