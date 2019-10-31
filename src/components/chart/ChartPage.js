@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChartItem from './ChartItem';
 import {Grid, Segment, GridColumn} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
+import { PassThrough } from 'stream';
 
 class ChartPage extends Component {
     render() {
@@ -15,14 +16,18 @@ class ChartPage extends Component {
         };
         var dealtype='';
         var housingtype='';
-        var bargainApart = {}, bargainOfficetel = {}, bargainHouse = {}, charterApart = {}, charterOfficetel = {}, charterHouse = {}
-                ,rentApart = {}, rentOfficetel = {}, rentHouse = {};
+        var bargainApart = [], bargainOfficetel = [], bargainHouse = [], charterApart = [], charterOfficetel = [], charterHouse = []
+                ,rentApart = {}, rentOfficetel = [], rentHouse = [];
         var i = 0;
 
         for(i=0;i<9;i++){
             if(conditionData.result[i]!==undefined){
                 dealtype=conditionData.result[i].dealType;
-                housingtype=conditionData.result[i].housingType;                
+                housingtype=conditionData.result[i].housingType;             
+                
+                if(!conditionData.result[i].average){
+                    continue;
+                }
 
                 if(dealtype === 'bargain'){
                     if(housingtype === 'apart'){
@@ -51,8 +56,9 @@ class ChartPage extends Component {
                 }
             }
         }
-
+        console.log("chart page rendering")
         return (
+            
             <div style={style}>
                 <Segment>
                     <Grid columns={3} relaxed='very'>

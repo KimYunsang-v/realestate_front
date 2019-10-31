@@ -1,12 +1,12 @@
 //날짜, 지역 선택 페이지
 import React, { Component } from 'react';
-import { Dropdown, Button, Segment, Input } from 'semantic-ui-react'
+import { Dropdown, Button, Segment, Input, Grid } from 'semantic-ui-react'
 import * as data from './SelectData';
 import './SelectPage.css';
 
 const regionSearchData = data.neighborhoodInfo.map( (data, index) => ({
     key: index,
-    text: data[0] + " " + data[1] + " " + data[2],
+    text: data[0] + " " + data[1],
     value: data
 }))
 
@@ -23,7 +23,8 @@ class SelectPage extends Component {
             district: '',
             neighborhood: '',
             year: '',
-            month: ''
+            month: '',
+            inputData : '',
         };
     }
 
@@ -75,34 +76,45 @@ class SelectPage extends Component {
     // 조회 버튼 이벤트
     searchClick = () => {
         let data = [];
-        let {city, district, neighborhood, year, month} = this.state;
+        let {year, month} = this.state;
+        let {inputData} = this.state;
+
+        console.log(inputData)
 
         data.push({
-            city: city,
-            district: district,
-            neighborhood: neighborhood,
+            city: inputData[0],
+            district: inputData[1],
+            neighborhood: '',
             year: year,
             month: month
         });
 
+        console.log(data)
         // 부모 컴포넌트 (Home)로 전달
         this.props.changeConditionData(data);
     };
 
-    searchChange = (e) => {
+    searchChange = (e, {value}) => {
+
         this.setState({
-            inputData: e.target.value
+            inputData: value
         });
+
+        console.log(value)
     }
 
     keyPress = (e) =>  {
         if (e.key === 'Enter') {
             console.log('do validate');
-            
             this.setState({
-                searchRegion : this.state.inputData
+                inputData : e.target.value
             })
         }
+    }
+
+    handleSearchChange = (e, { searchQuery }) => {
+        this.setState({ inputData : searchQuery });
+        console.log(searchQuery)
     }
 
     render() {
@@ -116,31 +128,56 @@ class SelectPage extends Component {
         } = this.state;
 
         return (
-            <div className="div">
-                <Segment>
-                
-                <Dropdown
-                        fluid
-                        onChange={this.searchChange}
-                        onSearchChange={this.keyPress}
-                        options={regionSearchData}
-                        placeholder='지역을 입력해주세요.'
-                        search
-                        //searchQuery={searchQuery}
-                        selection
-                        value={inputData}
-                    />
+            
+                // <Segment compact centered>
+                    <Grid centered style={{marginTop: 20}}> 
+                        <Grid.Row columns={3} centered>
+                            <Grid.Column width={6}>
+                                <Dropdown
+                                    compact
+                                    onChange={this.searchChange}
+                                    //onSearchChange={this.keyPress}
+                                    lazyLoad
+                                    options={regionSearchData}
+                                    placeholder='지역을 입력해주세요.'
+                                    search
+                                    //searchQuery={searchQuery}
+                                    selection
+                                    style={{width: '100%', height: '50px', fontSize:20}}
+                                    />
+                            </Grid.Column>
+
+                            <Grid.Column width={3}>
+                                <Dropdown placeholder='년' clearable selection options={yearData} onChange={this.yearChange} style={{width: '100%', height: '50px', fontSize:20}}/>
+                            </Grid.Column>
+
+                            {/* <Grid.Column width={3}>
+                                <Dropdown placeholder='월' clearable selection options={monthData}  onChange={this.monthChange} style={{width: '100%', height: '50px', fontSize:20}}/>        
+                            </Grid.Column> */}
+                        
+                        </Grid.Row>
+                        <Grid.Row centered>
+
+                            <Grid.Column width={6}>
+                                <Button color="grey" onClick={this.searchClick} style={{width: '100%', height: '50px', fontSize:20}}>조회</Button>
+                            </Grid.Column>
+                        </Grid.Row>
+               
                 
                     {/* <span className="dropdownFirst"><Dropdown placeholder='시/도' clearable search selection options={cityData} onChange={this.cityChange}/></span>
                     <span className="dropdown"><Dropdown placeholder='시/군/구' clearable search selection options={districtData} onChange={this.districtChange}/></span>
                     <span className="dropdown"><Dropdown placeholder='읍/면/동' clearable search selection options={neighborhoodData} onChange={this.neighborhoodChange}/></span> */}
                 
-                    <Dropdown placeholder='년' clearable selection options={yearData} onChange={this.yearChange}/>
-                    <Dropdown placeholder='월' clearable selection options={monthData}  onChange={this.monthChange}/>
+                    {/* <Dropdown placeholder='년' clearable selection options={yearData} onChange={this.yearChange}/> */}
+                    
+                        
+
+                    </Grid>
+
                 
-                    <span className="searchBtn"><Button color="grey" onClick={this.searchClick}>조회</Button></span>
-                </Segment>
-            </div>
+                    
+                // </Segment>
+            
         );
     }
 }

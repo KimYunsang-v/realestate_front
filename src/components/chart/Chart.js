@@ -76,16 +76,20 @@ class Chart extends Component{
                 info = await service.getOnlyCity(city);
             }
             
-            this.setState({
-                condition: {
-                    city: city,
-                    district: district,
-                    neighborhood: neighborhood,
-                    year: year,
-                    month: month,
-                    result: info.data
-                }
-            });
+            console.log(info.data)
+
+            if(info.data){
+                this.setState({
+                    condition: {
+                        city: city,
+                        district: district,
+                        neighborhood: neighborhood,
+                        year: year,
+                        month: month,
+                        result: info.data
+                    }
+                });
+            }
         }catch(e) {
             console.log(e);
         }
