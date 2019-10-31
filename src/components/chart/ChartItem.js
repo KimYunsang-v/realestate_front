@@ -13,7 +13,7 @@ class ChartItem extends Component {
       }
 
     state = {
-
+        
     }
     
     render() {
@@ -32,7 +32,6 @@ class ChartItem extends Component {
         var housetDataList = [];
         var renderItem = null;
         var seriesData = [];
-
 
         if(apart){
             xAxisList = Object.keys(apart);

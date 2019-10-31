@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
-import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon, Pagination } from 'semantic-ui-react'
+import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon, Pagination, Form, Checkbox } from 'semantic-ui-react'
 import ResultList from './ResultList';
 import noData from '../../../image/noData.png'
 // import Pagination from './Pagination';
@@ -90,6 +90,18 @@ class ResultPage extends Component {
         this.props.searchDataListener(data);
     }
 
+    handleHousingTypeChange = (e, { value }) => {
+        console.log(value)
+        this.setState({ value,
+            housingType : value })
+    }
+
+    handleDealTypeChange = (e, { value }) => {
+        this.setState({ value,
+            dealType : value
+         })
+    }
+
     render() {
         //const { pageOfItems } = this.props.resultData;
         //const { items,onChangePage } = this.props;
@@ -138,9 +150,89 @@ class ResultPage extends Component {
         }
 
         return (
-            <Segment basic>
+            <Segment basic style={{ paddingTop : 0}}>
                 <Segment>
-                    <Dropdown
+                    <Grid columns={3}>
+                        <Grid.Column>
+                            <Form>
+                                <Form.Field>
+                                <Checkbox
+                                    radio
+                                    label='아파트'
+                                    name='housingTypeRadioGroup'
+                                    value='apart'
+                                    checked={this.state.housingType === 'apart'}
+                                    onChange={this.handleHousingTypeChange}
+                                />
+                                </Form.Field>
+                                <Form.Field>
+                                <Checkbox
+                                    radio
+                                    label='주택'
+                                    name='housingTypeRadioGroup'
+                                    value='house'
+                                    checked={this.state.housingType === 'house'}
+                                    onChange={this.handleHousingTypeChange}
+                                />
+                                </Form.Field>
+                                <Form.Field>
+                                <Checkbox
+                                    radio
+                                    label='오피스텔'
+                                    name='housingTypeRadioGroup'
+                                    value='officetel'
+                                    checked={this.state.housingType === 'officetel'}
+                                    onChange={this.handleHousingTypeChange}
+                                />
+                                </Form.Field>
+                            </Form>
+                        </Grid.Column>
+
+                        <Grid.Column>
+                            <Form>
+                                <Form.Field>
+                                <Checkbox
+                                    radio
+                                    label='매매'
+                                    name='dealTypeRadioGroup'
+                                    value='bargain'
+                                    checked={this.state.dealType === 'bargain'}
+                                    onChange={this.handleDealTypeChange}
+                                />
+                                </Form.Field>
+                                <Form.Field>
+                                <Checkbox
+                                    radio
+                                    label='전세'
+                                    name='dealTypeRadioGroup'
+                                    value='charter'
+                                    checked={this.state.dealType === 'charter'}
+                                    onChange={this.handleDealTypeChange}
+                                />
+                                </Form.Field>
+                                <Form.Field>
+                                <Checkbox
+                                    radio
+                                    label='월세'
+                                    name='dealTypeRadioGroup'
+                                    value='rent'
+                                    checked={this.state.dealType === 'rent'}
+                                    onChange={this.handleDealTypeChange}
+                                />
+                            </Form.Field>
+                        </Form>
+
+                        </Grid.Column>
+
+                        <Grid.Column>
+                            <Button onClick = {this.clickSearchButton} > 조회 </Button>
+                        </Grid.Column>
+
+                    </Grid>
+                    
+
+                    
+                    {/* <Dropdown
                         options={this.state.houseoptions}
                         placeholder="집 타입"
                         // defaultValue = {this.state.houseoptions[0].text}
@@ -159,9 +251,9 @@ class ResultPage extends Component {
                         onChange={this.handleChangeDealType}
                         renderLabel={renderLabel2}
                     />
+                 */}
                 
-                
-                    <Button onClick = {this.clickSearchButton} > 조회 </Button>
+                    
                     </Segment>
                     {resultSegment}  
 

@@ -6,7 +6,7 @@ import './SelectPage.css';
 
 const regionSearchData = data.neighborhoodInfo.map( (data, index) => ({
     key: index,
-    text: data[0] + " " + data[1],
+    text: data[0] + " " + data[1] + " " + data[2],
     value: data
 }))
 
@@ -84,7 +84,7 @@ class SelectPage extends Component {
         data.push({
             city: inputData[0],
             district: inputData[1],
-            neighborhood: '',
+            neighborhood: inputData[2],
             year: year,
             month: month
         });
