@@ -3,8 +3,8 @@ import axios from 'axios';
 
 const baseUrl = "http://localhost:8080";
 
-export function getBoard() {
-    return axios.get(`${baseUrl}/realestate/board`);
+export function getBoard(city,district,page) {
+    return axios.get(`${baseUrl}/realestate/board/city/${city}/district/${district}/page/${page}`);
 }
 
 export function getDetailBoard(boardNo) {

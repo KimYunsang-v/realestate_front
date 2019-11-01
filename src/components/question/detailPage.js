@@ -30,10 +30,9 @@ class detailPage extends Component {
             })
         }
     }
-
+    
     render() {
-        return (
-            
+        return (            
             <Table>
                 <Table.Header>
                     {this.title}

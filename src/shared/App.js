@@ -4,6 +4,7 @@ import {Chart} from '../components/chart'
 import {Home} from '../components/home'
 import {Search} from '../components/search'
 import {Question, Menu} from 'components/pages';
+import Community from '../components/question/Community'
 import Login from 'components/login/Login'
 
 class App extends Component {
@@ -27,7 +28,7 @@ class App extends Component {
                     {/* <Route path="/search/:name" component={Search}/> */}
                     <Route path="/chart" component={Chart}/>
                     <Route path="/search" component={Search}/>
-                    <Route path="/question" component={Question} token={this.state.token}/>
+                    <Route path="/community" component={Community} token={this.state.token}/>
                     <Route path="/login" component={Login} setToken={this.setToken}/>
                 </Switch>
             </div>

@@ -41,6 +41,7 @@ class QuestionList extends Component {
                 content: contents,
                 title: title
             });
+        console.log(data)
         if(title !== '' && contents !== ''){
             this.props.handleSubmit(data);
             this.setState({open:false})
@@ -50,21 +51,20 @@ class QuestionList extends Component {
     render() {
         const {open,closeOnDimmerClick} = this.state
         //부모 컴포넌트에서 게시판 데이터 받아옴
-        const {pageOfItems} = this.props.boardData
+        const {pageOfItems} = this.props.items
         const {items,onChangePage,detailBoardData} = this.props
 
         const city = regionData.city;
 
         console.log(city);
         
-        const cityList = city.map((city, key) => (
-            <List.Item key={key}>
-                <List.Content>{city.text}</List.Content>
-            </List.Item>
-        ))
+        // const cityList = city.map((city, key) => (
+        //     <List.Item key={key}>
+        //         <List.Content>{city.text}</List.Content>
+        //     </List.Item>
+        // ))
 
         return(
-            
             <div>
                 {/* <Segment floated={"left"}>
                     <List>
@@ -91,29 +91,29 @@ class QuestionList extends Component {
                             <Button onClick={this.submitClick} positive>Submit</Button>
                             <Button onClick={this.close} negative>Cancle</Button>
                         </Modal.Actions>
-                    </Modal> 
+                    </Modal>
 
                 {/* 게시글 */}
                     <Table selectable>
                         <Table.Header>
                             <Table.Row textAlign='center'>
-                                <Table.HeaderCell width="2">no</Table.HeaderCell>
-                                <Table.HeaderCell width="6">제목</Table.HeaderCell>
+                                {/* <Table.HeaderCell width="2">no</Table.HeaderCell> */}
                                 <Table.HeaderCell width="5">작성자</Table.HeaderCell>
+                                <Table.HeaderCell width="6">제목</Table.HeaderCell>                                
                                 <Table.HeaderCell width="5">작성일</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
 
                         <Table.Body>
-                        { 
-                            pageOfItems.map( (contact) => {
+                        {
+                            items.map( (contact) => {
                             return (
                                 <Table.Row textAlign='center' key={contact.no}>
-                                    <Table.Cell>{contact.no - 6}</Table.Cell>
+                                    {/* <Table.Cell>{contact.no - 6}</Table.Cell> */}
+                                    <Table.Cell>{contact.author}</Table.Cell>
                                     <Table.Cell selectable onClick={detailBoardData.bind(this,contact.no)}>
                                             {contact.title}
                                     </Table.Cell>
-                                    <Table.Cell>{contact.author}</Table.Cell>
                                     <Table.Cell>{contact.registerDate}</Table.Cell>
                                 </Table.Row>
                             );
@@ -126,7 +126,7 @@ class QuestionList extends Component {
                                 </Table.HeaderCell>
                             </Table.Row>
                         </Table.Footer>
-                    </Table>    
+                    </Table>   
                 {/* </Segment> */}
             </div>
         )

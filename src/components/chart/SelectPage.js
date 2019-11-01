@@ -1,6 +1,8 @@
 //날짜, 지역 선택 페이지
 import React, { Component } from 'react';
-import { Dropdown, Button, Segment, Input, Grid } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
+import { Dropdown, Button, Segment, Input, Grid, Label, Search } from 'semantic-ui-react'
 import * as data from './SelectData';
 import './SelectPage.css';
 
@@ -9,6 +11,14 @@ const regionSearchData = data.neighborhoodInfo.map( (data, index) => ({
     text: data[0] + " " + data[1] + " " + data[2],
     value: data
 }))
+
+const resultRenderer = ({ text }) => <Label content={text} />
+
+resultRenderer.propTypes = {
+  text: PropTypes.string,
+  value: PropTypes.string,
+}
+
 
 class SelectPage extends Component {
     constructor(props) {
@@ -25,53 +35,62 @@ class SelectPage extends Component {
             year: '',
             month: '',
             inputData : '',
+            inputText : '',
+            isLoading : false,
+            results : [],
         };
     }
 
-    // 시/도
-    cityChange = (e, { value }) => {
-        if(value==="") {
-            // dropdown 초기화 문제!
-            this.setState({districtData: []});
-            this.setState({neighborhoodData: []});
-        }
-        else if(value==="세종특별자치시"){
-            // 시/군/구 없음 -> 읍/면/동
-            this.setState({neighborhoodData : data.district(`${value}`)});
-        }
-        else {
-            this.setState({districtData : data.district(`${value}`)});
-        }
+    // // 시/도
+    // cityChange = (e, { value }) => {
+    //     if(value==="") {
+    //         // dropdown 초기화 문제!
+    //         this.setState({districtData: []});
+    //         this.setState({neighborhoodData: []});
+    //     }
+    //     else if(value==="세종특별자치시"){
+    //         // 시/군/구 없음 -> 읍/면/동
+    //         this.setState({neighborhoodData : data.district(`${value}`)});
+    //     }
+    //     else {
+    //         this.setState({districtData : data.district(`${value}`)});
+    //     }
 
-        this.setState({city : value});
-    };
+    //     this.setState({city : value});
+    // };
 
-    // 시/군/구
-    districtChange = (e, { value }) => {
-        if(value==="") {
-            // dropdown 초기화 문제!
-            this.setState({neighborhoodData: []});
-        }
-        else {
-            this.setState({neighborhoodData : data.neighborhood(this.state.city, `${value}`)});
-        }
-        this.setState({district : value});
-    };
+    // // 시/군/구
+    // districtChange = (e, { value }) => {
+    //     if(value==="") {
+    //         // dropdown 초기화 문제!
+    //         this.setState({neighborhoodData: []});
+    //     }
+    //     else {
+    //         this.setState({neighborhoodData : data.neighborhood(this.state.city, `${value}`)});
+    //     }
+    //     this.setState({district : value});
+    // };
 
-    // 읍/면/동
-    neighborhoodChange = (e, { value }) => {
-        this.setState({neighborhood : value});
-    };
+    // // 읍/면/동
+    // neighborhoodChange = (e, { value }) => {
+    //     this.setState({neighborhood : value});
+    // };
 
     // 년
     yearChange = (e, { value }) => {
         this.setState({year : value});
     };
 
-    // 월
-    monthChange = (e, { value }) => {
-        this.setState({month : value});
-    };
+    // // 월
+    // monthChange = (e, { value }) => {
+    //     this.setState({month : value});
+    // };
+
+    // dropdownOnClick = () => {
+    //     this.setState({
+    //         inputData : ''
+    //     })
+    // }
 
     // 조회 버튼 이벤트
     searchClick = () => {
@@ -94,27 +113,53 @@ class SelectPage extends Component {
         this.props.changeConditionData(data);
     };
 
-    searchChange = (e, {value}) => {
+    // searchChange = (e, {value}) => {
 
-        this.setState({
-            inputData: value
-        });
+    //     this.setState({
+    //         inputData: value
+    //     });
 
-        console.log(value)
-    }
+    //     console.log(value)
+    // }
 
-    keyPress = (e) =>  {
-        if (e.key === 'Enter') {
-            console.log('do validate');
-            this.setState({
-                inputData : e.target.value
+    // keyPress = (e) =>  {
+    //     if (e.key === 'Enter') {
+    //         console.log('do validate');
+    //         this.setState({
+    //             inputData : e.target.value
+    //         })
+    //     }
+    // }
+
+    // handleSearchChange = (e, { searchQuery }) => {
+    //     this.setState({ inputData : searchQuery });
+    //     console.log(searchQuery)
+    // }
+
+    handleResultSelect = (e, { result }) => this.setState({ 
+        inputData: result.value,
+        inputText: result.text 
+    })
+
+    handleSearchChange = (e, { value }) => {
+        this.setState({ isLoading: true, inputText : value })
+    
+        setTimeout(() => {
+          if (this.state.inputText.length < 1) 
+            return this.setState({
+                inputText : '',
+                isLoading : false,
+                results : [],
             })
-        }
-    }
-
-    handleSearchChange = (e, { searchQuery }) => {
-        this.setState({ inputData : searchQuery });
-        console.log(searchQuery)
+    
+          const re = new RegExp(_.escapeRegExp(this.state.inputText), 'i')
+          const isMatch = (result) => re.test(result.value)
+            
+          this.setState({
+            isLoading: false,
+            results: _.filter(regionSearchData, isMatch),
+          })
+        }, 300)
     }
 
     render() {
@@ -124,7 +169,10 @@ class SelectPage extends Component {
             neighborhoodData,
             yearData,
             monthData,
-            inputData
+            inputData,
+            isLoading,
+            results,
+            inputText
         } = this.state;
 
         return (
@@ -133,7 +181,7 @@ class SelectPage extends Component {
                     <Grid centered style={{marginTop: 20}}> 
                         <Grid.Row columns={3} centered>
                             <Grid.Column width={6}>
-                                <Dropdown
+                                {/* <Dropdown
                                     compact
                                     onChange={this.searchChange}
                                     //onSearchChange={this.keyPress}
@@ -144,6 +192,18 @@ class SelectPage extends Component {
                                     //searchQuery={searchQuery}
                                     selection
                                     style={{width: '100%', height: '50px', fontSize:20}}
+                                    /> */}
+                                     <Search
+                                        loading={isLoading}
+                                        onResultSelect={this.handleResultSelect}
+                                        onSearchChange={_.debounce(this.handleSearchChange, 500, {
+                                            leading: true,
+                                        })}
+                                        results={results}
+                                        value={inputText}
+                                        resultRenderer={resultRenderer}
+                                        {...this.props}
+                                        style={{width: '100%', height: '50px', fontSize:20}}
                                     />
                             </Grid.Column>
 

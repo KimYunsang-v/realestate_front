@@ -52,9 +52,9 @@ class Navigator extends Component {
                                     거래 매물                                  
                                 </Menu.Item>
                             </NavLink>
-                            <NavLink exact to="/question">
-                                <Menu.Item name='question' style={{margin:0}} active={activeItem === 'question'} onClick={this.handleItemClick} position='right'>                                    
-                                    커뮤니티                                    
+                            <NavLink exact to="/community">
+                                <Menu.Item name='community' style={{margin:0}} active={activeItem === 'community'} onClick={this.handleItemClick} position='right'>                                    
+                                    커뮤니티          
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/login" style={{marginRight: 150}}>
