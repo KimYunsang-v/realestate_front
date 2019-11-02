@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { QuestionList } from './';
+import { QuestionList, EditPage, DetailPage } from './';
 import * as service from '../../lib/boardApi';
 import { Modal, Button, Comment, Header, Form, Divider, Segment, Grid } from 'semantic-ui-react';
 import RegionTreeView from './RegionTreeView';
@@ -24,7 +24,8 @@ class Community extends Component {
             user:'',
             city: '',
             district: '',
-            page: 1
+            page: 1,
+            mainComponent: 'listComponent'
         };
         this.onChangePage = this.onChangePage.bind(this);
     }
@@ -58,6 +59,41 @@ class Community extends Component {
             })
             // this.boardData()
         // }
+        this.componentChangeListener("listComponent", "");
+    }
+
+    componentChangeListener = () => {
+        const {mainComponent} = this.state;
+
+        if(mainComponent === 'editComponet'){
+            return <EditPage city={this.state.city} district={this.state.district} user={this.state.user} />
+        } else if (mainComponent === 'detailComponet') {
+            return <DetailPage boardItem={this.state.detailBoardItems}/>
+        } else if (mainComponent === 'listComponent') {
+            return <QuestionList
+            handleSubmit={this.handleSubmit}
+            // boardData={this.state}
+            items={this.state.dataList}
+            onChangePage={this.onChangePage}
+            detailBoardData={this.detailBoardData}
+            user = {this.state.user}
+                    />
+        } else {
+            return null;
+        }
+    }
+
+    setMainComponent = (component) => {
+        this.setState({
+            component : component
+        })
+    }
+
+    listClickEvent = (data) => {
+        this.setState({
+            component : 'detailComponent',
+
+        })
     }
 
     // 게시판 데이터 get
@@ -177,6 +213,28 @@ class Community extends Component {
         };
         const {title, content, answers} = this.state.detailBoardItems
         const {open, closeOnDimmerClick} = this.state
+
+
+        var mainComponent = this.componentChangeListener();
+
+        // if(component === 'editComponet'){
+        //     mainComponent = <EditPage city={this.state.city} district={this.state.district} user={this.state.user} />
+        // } else if (component === 'detailComponet') {
+        //     mainComponent = <DetailPage boardItem={data}/>
+        // } else if (component === 'listComponent') {
+        //     mainComponent = <QuestionList
+        //     handleSubmit={this.handleSubmit}
+        //     // boardData={this.state}
+        //     items={this.state.dataList}
+        //     onChangePage={this.onChangePage}
+        //     detailBoardData={this.detailBoardData}
+        //     user = {this.state.user}
+        //             />
+        // } else {
+        //     return null;
+        // }
+        
+
         return (
             <Segment>
             <Grid columns={2}>
@@ -187,14 +245,10 @@ class Community extends Component {
                 </Grid.Column>
 
                 <Grid.Column width={13}>
-                    <QuestionList
-                        handleSubmit={this.handleSubmit}
-                        // boardData={this.state}
-                        items={this.state.dataList}
-                        onChangePage={this.onChangePage}
-                        detailBoardData={this.detailBoardData}
-                        user = {this.state.user}
-                    />
+
+                {/* <Button color='olive' onClick={this.closeConfigShow(false)}>글쓰기</Button> */}
+
+                    {mainComponent}
                 </Grid.Column>
 
                 <Modal

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Comment, Button, Segment, Form, TextArea } from 'semantic-ui-react';
 
 
-class detailPage extends Component {
+class editPage extends Component {
     _isMounted = false
     state = {
         title: '',
@@ -64,4 +64,4 @@ class detailPage extends Component {
     }
 }
 
-export default detailPage;
+export default editPage;

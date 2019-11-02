@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const baseUrl = "http://localhost:8080";
+const baseUrl = "http://13.125.253.140:8080";
 
 export function getBoard(city,district,page) {
     return axios.get(`${baseUrl}/realestate/board/city/${city}/district/${district}/page/${page}`);
