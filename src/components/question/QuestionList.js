@@ -74,7 +74,7 @@ class QuestionList extends Component {
 
             {/* 새로운 글 팝업 */}
                 {/* <Segment floated={"right"}> */}
-                    <Button color='olive' onClick={this.closeConfigShow(false)}>글쓰기</Button>
+                    {/* <Button color='olive' onClick={this.closeConfigShow(false)}>글쓰기</Button> */}
                     <Modal
                         size='tiny'
                         open={open}
@@ -106,23 +106,24 @@ class QuestionList extends Component {
 
                         <Table.Body>
                         {
-                            items.map( (contact) => {
+                            items.map( (post) => {
                             return (
-                                <Table.Row textAlign='center' key={contact.no}>
+                                <Table.Row textAlign='center' key={post.no}>
                                     {/* <Table.Cell>{contact.no - 6}</Table.Cell> */}
-                                    <Table.Cell>{contact.author}</Table.Cell>
-                                    <Table.Cell selectable onClick={detailBoardData.bind(this,contact.no)}>
-                                            {contact.title}
+                                    <Table.Cell>{post.author}</Table.Cell>
+                                    <Table.Cell selectable onClick={() => this.props.listClickEvent(post)}>
+                                            {post.title}
                                     </Table.Cell>
-                                    <Table.Cell>{contact.registerDate}</Table.Cell>
+                                    <Table.Cell>{post.registerDate}</Table.Cell>
                                 </Table.Row>
                             );
                         })}
+
                         </Table.Body>
                         <Table.Footer>
                             <Table.Row textAlign='center'>
                                 <Table.HeaderCell colSpan='4'>
-                                <Pagination items={items} onChangePage={onChangePage}/>
+                                {/* <Pagination items={items} onChangePage={onChangePage}/> */}
                                 </Table.HeaderCell>
                             </Table.Row>
                         </Table.Footer>

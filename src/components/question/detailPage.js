@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Comment, Button, Segment, Form, TextArea } from 'semantic-ui-react';
-
+import { Table, Comment, Button, Segment, Form, TextArea, Grid, Header, Container, Divider, Label, Icon, List, Input} from 'semantic-ui-react';
 
 class detailPage extends Component {
     _isMounted = false
@@ -11,39 +10,91 @@ class detailPage extends Component {
 
     componentDidMount() {
        // this.setData()
-        this._isMounted = true
+        // this._isMounted = true
     }
 
     componentWillUnmount() {
-        this._isMounted = false
-        this.setData()
+        // this._isMounted = false
+        // this.setData()
     }
     
-    setData = () => {
-        const detailBoardItems = this.props
-        console.log(detailBoardItems)
-        if(this._isMounted){
-            this.setState({
-                title: detailBoardItems.title,
-                content: detailBoardItems.content
-            })
+    // setData = () => {
+    //     const detailBoardItems = this.props
+    //     console.log(detailBoardItems)
+    //     if(this._isMounted){
+    //         this.setState({
+    //             title: detailBoardItems.title,
+    //             content: detailBoardItems.content
+    //         })
+    //     }
+    // }
+
+    inputChange = (e) => {
+        console.log(e.target.value)
+        this.setState({
+            inputData : e.target.value
+        })
+    }
+
+    addAnswerBtnListener = () => {
+        const {selectedPost} = this.props;
+        console.log(this.state.inputData)
+        const data = {
+            author : this.props.user,
+            boardNo: selectedPost.no,
+            content: this.state.inputData
         }
+        this.props.replySubmit(data);
+
+        this.setState({
+            inputData : '',
+        })
     }
     
     render() {
+        const {selectedPost}  = this.props;
+        const {inputData} = this.state;
+
+        var answerList ='';
+        if(selectedPost.answers){
+            answerList = selectedPost.answers.map(answer => {
+                return (
+                        <Container>
+                            <Divider></Divider>
+                            <List divided>
+                                <List.Item>
+                                    {answer.content}
+                                </List.Item>
+                            </List>     
+                        </Container>
+                )
+            })
+        }
+        console.log(selectedPost)
         return (   
-            
-            <Segment>
-                
-                <Form>
+            <Container>     
+                <Segment>
+                        <Container textAlign='left' style={{fontSize:'20px'}}>{selectedPost.title}</Container>
+                        <Container textAlign='right'>{selectedPost.registerDate}</Container>
+                                            
+                        <Container textAlign='left'>
+                            <Label>
+                                <Icon name='user'/>{selectedPost.author}
+                            </Label>
+                        </Container>
+                        <Divider/>
                     
-                    <Form.Input label='제목' placeholder='제목을 입력해주세요' />                        
+                    {/* <Segment style={{height : '400px'}}> */}
+                        <Container as='p' style={{height:'400px'}}>{selectedPost.content}</Container>                        
+                            {answerList}
 
-                    <TextArea placeholder='내용을 입력해주세요' />
-                    
-                </Form>
+                        <Divider/>
 
-            </Segment>
+                        <Input placeholder='댓글을 입력해주세요' value={inputData} onChange={(e) => this.inputChange(e)}/> 
+                        <Button onClick={() => this.addAnswerBtnListener()}>댓글달기</Button>
+
+                    </Segment>
+            </Container>
 
 
 

@@ -3,6 +3,7 @@ import { QuestionList, EditPage, DetailPage } from './';
 import * as service from '../../lib/boardApi';
 import { Modal, Button, Comment, Header, Form, Divider, Segment, Grid } from 'semantic-ui-react';
 import RegionTreeView from './RegionTreeView';
+import { district } from '../chart/SelectData';
 
 class Community extends Component {
     constructor() {
@@ -10,14 +11,14 @@ class Community extends Component {
         this.state = {
             dataList: [],
             // pageOfItems: [],
-            detailBoardItems: {
-                title: '',
-                content: '',
-                author: '',
-                no: 0,
-                answers: [],
-                registerDate: ''
-            },
+            // detailBoardItems: {
+            //     title: '',
+            //     content: '',
+            //     author: '',
+            //     no: 0,
+            //     answers: [],
+            //     registerDate: ''
+            // },
             open: false,
             closeOnDimmerClick: true,
             inputData: '',
@@ -25,7 +26,8 @@ class Community extends Component {
             city: '',
             district: '',
             page: 1,
-            mainComponent: 'listComponent'
+            mainComponent: 'listComponent',
+            selectedPost : '',
         };
         this.onChangePage = this.onChangePage.bind(this);
     }
@@ -63,51 +65,71 @@ class Community extends Component {
     }
 
     componentChangeListener = () => {
-        const {mainComponent} = this.state;
+        const {mainComponent, city, district} = this.state;
 
-        if(mainComponent === 'editComponet'){
-            return <EditPage city={this.state.city} district={this.state.district} user={this.state.user} />
-        } else if (mainComponent === 'detailComponet') {
-            return <DetailPage boardItem={this.state.detailBoardItems}/>
+        if(mainComponent === 'editComponent'){            
+            return( 
+                <Grid.Column width={13}>
+                    <EditPage city={this.state.city} district={this.state.district} user={this.state.user} handleSubmit={this.handleSubmit}/>                
+                </Grid.Column>
+             )
+        } else if (mainComponent === 'detailComponent') {
+            return( 
+                <Grid.Column width={13}>
+                    <DetailPage user = {this.state.user} selectedPost={this.state.selectedPost} replySubmit = {this.replySubmit}/>
+                </Grid.Column>
+             )
         } else if (mainComponent === 'listComponent') {
-            return <QuestionList
-            handleSubmit={this.handleSubmit}
-            // boardData={this.state}
-            items={this.state.dataList}
-            onChangePage={this.onChangePage}
-            detailBoardData={this.detailBoardData}
-            user = {this.state.user}
-                    />
+            
+            return( 
+                <Grid.Column width={13}>
+                    <Button color="olive" onClick = {() => this.setMainComponent('editComponent')} > 글쓰기 </Button>
+                    <QuestionList
+                        handleSubmit={this.handleSubmit}
+                        // boardData={this.state}
+                        items={this.state.dataList}
+                        onChangePage={this.onChangePage}
+                        listClickEvent = {this.listClickEvent}
+                        //detailBoardData={this.detailBoardData}
+                        user = {this.state.user}/>
+                </Grid.Column>
+             )
         } else {
             return null;
         }
     }
 
     setMainComponent = (component) => {
+        const {city, district} = this.state;
+        if(component === 'editComponent' && !city || !district){
+            return alert('지역을 선택해주세요')
+        }
         this.setState({
-            component : component
+            mainComponent : component
         })
     }
 
     listClickEvent = (data) => {
         this.setState({
-            component : 'detailComponent',
-
+            selectedPost : data,
+            mainComponent : 'detailComponent',
         })
     }
 
     // 게시판 데이터 get
     getBoardData = async (city, district) => {
-        const {page} = this.state
+        const page = this.state.page
         this.setState({
             city : city,
-            district : district
+            district : district,
         })
+        console.log(city, district, page);
         try{
             console.log("getBoard");
             const responseInfo = await service.getBoard(city, district, page);
             console.log("responseInfo", responseInfo);
             this.setState({
+                mainComponent : 'listComponent',
                 dataList : responseInfo.data,
             });
         } catch (e) {
@@ -116,20 +138,20 @@ class Community extends Component {
     }
 
     // 게시글 세부 내용 데이터 get
-    detailBoardData = (data) => {
-        try{
-            console.log("getDatailBoard")
-            //const detailInfo = await service.getDetailBoard(boardNo);
-            // console.log(detailInfo.data)
-            this.setState({
-                detailBoardItems : data,
-                open: true,
-                closeOnDimmerClick: false
-            });
-        }catch(e){
-            console.log(e)
-        }
-    }
+    // detailBoardData = (data) => {
+    //     try{
+    //         console.log("getDatailBoard")
+    //         //const detailInfo = await service.getDetailBoard(boardNo);
+    //         // console.log(detailInfo.data)
+    //         this.setState({
+    //             detailBoardItems : data,
+    //             open: true,
+    //             closeOnDimmerClick: false
+    //         });
+    //     }catch(e){
+    //         console.log(e)
+    //     }
+    // }
 
     // 댓글 내용 입력 시
     inputChange = (e) => {
@@ -139,20 +161,25 @@ class Community extends Component {
     }
 
     // 댓글 post
-    replySubmit = async () => {
+    replySubmit = async (data) => {
         try{
-            const {no} = this.state.detailBoardItems
-            const data = []
-            const {inputData} = this.state
-            if(inputData !== ''){
-                data.push({
-                    author: this.state.user,
-                    boardNo: no,
-                    content: inputData
-                });
-                await service.postNewReply(data)
-                this.detailBoardData(no);   //리로딩
-            }
+            // const {no} = this.state.detailBoardItems
+            // const data = []
+            // const {inputData} = this.state
+            // if(inputData !== ''){
+            //     data.push({
+            //         author: this.state.user,
+            //         boardNo: no,
+            //         content: inputData
+            //     });
+            const response = await service.postNewReply(data);
+            console.log(response.data)
+            this.setState({
+                selectedPost : response.data,
+                mainComponent : 'detailComponent'
+            })
+            //this.detailBoardData(no);   //리로딩
+            
         }catch(e){
             console.log(e)
         }
@@ -185,11 +212,16 @@ class Community extends Component {
 
     //새로운 게시글 post
     handleSubmit = async (data) => {        
-        data[0]['city'] = this.state['city'];
-        data[0]['district'] = this.state['district'];
+        // data[0]['city'] = this.state['city'];
+        // data[0]['district'] = this.state['district'];
         console.log(data)
-        await service.postNewContent(data);
-       // this.boardData();   //리로딩
+        const responseInfo = await service.postNewContent(data);
+        console.log(responseInfo)
+        this.setState({
+            dataList : responseInfo.data,
+            mainComponent : 'listComponent'
+        })
+        //this.getBoardData();   //리로딩
     }
 
     // 게시글 삭제 post
@@ -211,7 +243,7 @@ class Community extends Component {
         const style1 = {
             margin: '5rem 16rem 16rem'
         };
-        const {title, content, answers} = this.state.detailBoardItems
+        // const {title, content, answers} = this.state.detailBoardItems
         const {open, closeOnDimmerClick} = this.state
 
 
@@ -243,15 +275,10 @@ class Community extends Component {
                         <RegionTreeView getBoardData={this.getBoardData}/>
                     </Segment>
                 </Grid.Column>
-
-                <Grid.Column width={13}>
-
-                {/* <Button color='olive' onClick={this.closeConfigShow(false)}>글쓰기</Button> */}
-
                     {mainComponent}
-                </Grid.Column>
-
-                <Modal
+                
+                
+                {/* <Modal
                     open={open}
                     closeOnDimmerClick={closeOnDimmerClick}
                     onClose={this.close}
@@ -265,7 +292,7 @@ class Community extends Component {
                     <Modal.Content>
                         <Divider/>
                         <Comment.Group>
-                            <Header> Comments </Header>
+                            <Header> Comments </Header> */}
                                 {
                                     // answers.map( (contact,i) => {
                                     //     return (
@@ -283,7 +310,7 @@ class Community extends Component {
                                     //     );
                                     // })
                                 }
-                            <Form reply>
+                            {/* <Form reply>
                                 <Form.TextArea onChange={this.inputChange} 
                                                 value={this.state.inputData}/>
                                 <Button 
@@ -300,7 +327,7 @@ class Community extends Component {
                         <Button icon='trash' negative onClick={this.handleDelete} />
                         <Button onClick={ this.close } primary>뒤로가기</Button>
                     </Modal.Actions>
-                </Modal>
+                </Modal> */}
             </Grid> 
             </Segment>
         )

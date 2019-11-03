@@ -21,7 +21,7 @@ class RegionTreeView extends Component {
             this.props.getBoardData(this.state.city, data);
             console.log(this.state.city);
             this.setState({
-                district : data 
+                district : data
             });
         }else {
             var districts = regionTreeData[data];
@@ -31,6 +31,13 @@ class RegionTreeView extends Component {
                 listItemData : districts,
             });
         }
+    }
+
+    clickDistrictListener = (data) => {
+        this.setState({
+            district : data
+        });
+        this.props.getBoardData(this.state.city, this.state.district)
     }
 
     clickBackBtn = () => {
