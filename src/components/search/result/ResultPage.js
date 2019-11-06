@@ -132,14 +132,21 @@ class ResultPage extends Component {
 
         if(dataList.length != 0){
             resultSegment = (
-                <Segment raised style={{overflow: 'auto', height: 500 }}>
-                    <List selection divided relaxed> {dataList} </List>                           
+                <Segment raised style={{overflow: 'auto', height: 480 }}>
+                    <List selection divided relaxed> {dataList} </List>    
+                    <Pagination
+                        defaultActivePage = {1}
+                        activePage={paging}
+                        totalPages= {4}
+                        siblingRange={1}
+                        onPageChange={this.pageChangeListener}
+                    />                       
                 </Segment>
             )
         }
         else {
             resultSegment = (
-                <Segment placeholder piled style={{ height: 500, marginTop:20 }}>
+                <Segment placeholder piled style={{ height: 480, marginTop:20 }}>
                     {/* <Image src={noData} size='small'/> */}
                     <Header icon>
                         <Icon name='search'/>
@@ -153,12 +160,11 @@ class ResultPage extends Component {
             <Segment basic style={{ paddingTop : 0}}>
                 <Segment>
                     <Grid>
-                        <Grid.Row columns={3} style={{padding:5}}>
+                        <Grid.Row columns={3} style={{padding:5}} centered>
                             {/* <Form>
                                 <Form.Field> */}
-                                <Grid.Column>
-                                    <Checkbox
-                                        
+                                <Grid.Column style={{padding : '5px'}} width={4}>
+                                    <Checkbox                                        
                                         radio
                                         label='아파트'
                                         name='housingTypeRadioGroup'
@@ -169,7 +175,7 @@ class ResultPage extends Component {
                                 {/* </Form.Field>
                                 <Form.Field> */}
                                 </Grid.Column>
-                                <Grid.Column>
+                                <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
                                     radio
                                     label='주택'
@@ -179,7 +185,7 @@ class ResultPage extends Component {
                                     onChange={this.handleHousingTypeChange}
                                 />
                                 </Grid.Column>
-                                <Grid.Column>
+                                <Grid.Column  style={{padding : '5px'}} width={4}>
                                 {/* </Form.Field>
                                 <Form.Field> */}
                                 <Checkbox
@@ -195,10 +201,12 @@ class ResultPage extends Component {
                             </Grid.Column>
                         </Grid.Row>
 
-                        <Grid.Row columns={3} style={{padding:5}}>
+                        <Divider style={{ margin : 0}}/>
+
+                        <Grid.Row columns={3} style={{padding:5}} centered>
                             {/* <Form>
                                 <Form.Field> */}
-                                <Grid.Column>
+                                <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
                                     radio
                                     label='매매'
@@ -210,7 +218,7 @@ class ResultPage extends Component {
                                 </Grid.Column>
                                 {/* </Form.Field>
                                 <Form.Field> */}
-                                <Grid.Column>
+                                <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
                                     radio
                                     label='전세'
@@ -222,7 +230,7 @@ class ResultPage extends Component {
                                 </Grid.Column>
                                 {/* </Form.Field>
                                 <Form.Field> */}
-                                <Grid.Column>
+                                <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
                                     radio
                                     label='월세'
@@ -235,6 +243,8 @@ class ResultPage extends Component {
                         </Form> */}
                         </Grid.Column>
                         </Grid.Row>
+
+                        <Divider style={{ margin : 0}}/>
 
                         {/* <Grid.Column> */}
                         {/* </Grid.Column> */}
@@ -271,12 +281,7 @@ class ResultPage extends Component {
                     </Segment>
                     {resultSegment}  
 
-                    {/* <Pagination
-                        activePage={paging}
-                        totalPages= {10}
-                        siblingRange={1}
-                        onPageChange={this.pageChangeListener}
-                    /> */}
+                    
 
             </Segment>
         

@@ -9,6 +9,7 @@ import Login from 'components/login/Login'
 
 class App extends Component {
 
+
     state = {
         token : ''
     }
@@ -23,7 +24,7 @@ class App extends Component {
         return (
             <div>
                 <Menu/>
-                <Route exact path="/" component={Home} setToken={this.setToken}/>
+                    <Route exact path="/" component={Home} setToken={this.setToken}/>
                 <Switch>
                     {/* <Route path="/search/:name" component={Search}/> */}
                     <Route path="/chart" component={Chart}/>

@@ -52,12 +52,18 @@ class MapPage extends Component {
             console.log(nextProps)
             // 마커가 표시될 위치입니다
             const { latitude, longitude } = nextProps.markerData;
-            var markerPosition  = new daum.maps.LatLng(latitude, longitude); 
+            var markerPosition  = new daum.maps.LatLng(latitude, longitude);
 
-            // 마커를 생성합니다
-            marker = new daum.maps.Marker({
-                position: markerPosition
-            });
+            
+
+            if(marker){
+                marker.setPosition(markerPosition);
+            } else {
+                // 마커를 생성합니다
+                marker = new daum.maps.Marker({
+                    position: markerPosition
+                });
+            }
 
             map.setCenter(markerPosition)
             marker.setMap(map);

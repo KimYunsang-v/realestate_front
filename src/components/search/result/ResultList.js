@@ -47,23 +47,20 @@ class ResultList extends Component {
 
         return (
                 
-            <List.Item style={{height: 100 }} onClick={this.itemClickListener}>
+            <List.Item style={{height: 65 }} onClick={this.itemClickListener} verticalAlign='center' >
                 {/* <Grid.Column width={4}>
                     
                 </Grid.Column> */}
-                <List.Icon size='large' verticalAlign='middle' src={housingImage} />
-                <List.Header>
-                    <font color="grey"><h4>{name}  {floor}층 </h4></font>                    
-                </List.Header>
+                <List.Icon size='large' verticalAlign='middle' name='building' />                
                 <List.Content>
+                    <List.Header>
+                        <font color="grey"><h4>{name}  {floor}층 </h4></font>                    
+                    </List.Header>
                     {deposit?(<font color="orange">{deposit}/{price}</font>):(<font color="orange">{price}</font>)}만원
                     <h4 className="title">({area}㎡)</h4>
                 </List.Content>
                 <Grid.Column width={9}>
-                {/* <Label circular>{dealType}</Label> */}   
-                    
-                    
-                    
+                {/* <Label circular>{dealType}</Label> */}                       
                 </Grid.Column>
             </List.Item>
             

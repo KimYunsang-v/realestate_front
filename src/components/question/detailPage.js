@@ -29,6 +29,10 @@ class detailPage extends Component {
     //     }
     // }
 
+    listBtnClickListener = () => {
+        this.props.setMainComponent('listComponent');
+    }
+
     inputChange = (e) => {
         console.log(e.target.value)
         this.setState({
@@ -74,6 +78,7 @@ class detailPage extends Component {
         console.log(selectedPost)
         return (   
             <Container>     
+                <Button onClick = {() => this.listBtnClickListener()}>목록으로</Button>
                 <Segment>
                         <Container textAlign='left' style={{fontSize:'20px'}}>{selectedPost.title}</Container>
                         <Container textAlign='right'>{selectedPost.registerDate}</Container>

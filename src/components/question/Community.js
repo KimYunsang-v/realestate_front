@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { QuestionList, EditPage, DetailPage } from './';
 import * as service from '../../lib/boardApi';
-import { Modal, Button, Comment, Header, Form, Divider, Segment, Grid } from 'semantic-ui-react';
+import { Modal, Button, Comment, Header, Form, Divider, Segment, Grid, Container } from 'semantic-ui-react';
 import RegionTreeView from './RegionTreeView';
 import { district } from '../chart/SelectData';
 
@@ -76,14 +76,14 @@ class Community extends Component {
         } else if (mainComponent === 'detailComponent') {
             return( 
                 <Grid.Column width={13}>
-                    <DetailPage user = {this.state.user} selectedPost={this.state.selectedPost} replySubmit = {this.replySubmit}/>
+                    <DetailPage user = {this.state.user} selectedPost={this.state.selectedPost} replySubmit = {this.replySubmit} setMainComponent = {this.setMainComponent}/>
                 </Grid.Column>
              )
         } else if (mainComponent === 'listComponent') {
             
             return( 
-                <Grid.Column width={13}>
-                    <Button color="olive" onClick = {() => this.setMainComponent('editComponent')} > 글쓰기 </Button>
+                <Grid.Column width={13}>    
+                    <Button color="olive" onClick = {() => this.setMainComponent('editComponent')} style={{marginBottom: 10}}> 글쓰기 </Button>                
                     <QuestionList
                         handleSubmit={this.handleSubmit}
                         // boardData={this.state}
@@ -92,7 +92,7 @@ class Community extends Component {
                         listClickEvent = {this.listClickEvent}
                         //detailBoardData={this.detailBoardData}
                         user = {this.state.user}/>
-                </Grid.Column>
+                </Grid.Column>                
              )
         } else {
             return null;

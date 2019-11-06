@@ -5,8 +5,6 @@ import { PassThrough } from 'stream';
 
 const regionTreeData = data.districtInfo;
 
-
-
 class RegionTreeView extends Component {
 
     state = {
@@ -40,6 +38,10 @@ class RegionTreeView extends Component {
         this.props.getBoardData(this.state.city, this.state.district)
     }
 
+    
+
+        
+
     clickBackBtn = () => {
         this.setState({
             city : '',
@@ -52,7 +54,7 @@ class RegionTreeView extends Component {
     render() {
 
         console.log(regionTreeData)
-        
+
         var {listItemData, city, district} = this.state;
         var breadcrumbCity = '';
 
@@ -63,7 +65,7 @@ class RegionTreeView extends Component {
                 </Breadcrumb>
             )
         }
-
+        
         if(district){
             breadcrumbCity = (
                 <Breadcrumb>

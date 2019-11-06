@@ -139,7 +139,6 @@ class Search extends Component {
         return(
                 <Grid padded>
                         <Grid.Column width={11}>
-                    
                             <MapPage kakaoPlacesSearch = {this.kakaoPlacesSearch}
                                     searchData = {this.state.searchData}
                                     markerData = {this.state.markerData}
