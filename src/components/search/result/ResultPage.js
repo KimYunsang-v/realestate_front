@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
-import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon, Pagination, Form, Checkbox } from 'semantic-ui-react'
+import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon, Pagination, Form, Checkbox, Container } from 'semantic-ui-react'
 import ResultList from './ResultList';
 import noData from '../../../image/noData.png'
 // import Pagination from './Pagination';
@@ -152,20 +152,24 @@ class ResultPage extends Component {
         return (
             <Segment basic style={{ paddingTop : 0}}>
                 <Segment>
-                    <Grid columns={3}>
-                        <Grid.Column>
-                            <Form>
-                                <Form.Field>
-                                <Checkbox
-                                    radio
-                                    label='아파트'
-                                    name='housingTypeRadioGroup'
-                                    value='apart'
-                                    checked={this.state.housingType === 'apart'}
-                                    onChange={this.handleHousingTypeChange}
-                                />
-                                </Form.Field>
-                                <Form.Field>
+                    <Grid>
+                        <Grid.Row columns={3} style={{padding:5}}>
+                            {/* <Form>
+                                <Form.Field> */}
+                                <Grid.Column>
+                                    <Checkbox
+                                        
+                                        radio
+                                        label='아파트'
+                                        name='housingTypeRadioGroup'
+                                        value='apart'
+                                        checked={this.state.housingType === 'apart'}
+                                        onChange={this.handleHousingTypeChange}
+                                    />
+                                {/* </Form.Field>
+                                <Form.Field> */}
+                                </Grid.Column>
+                                <Grid.Column>
                                 <Checkbox
                                     radio
                                     label='주택'
@@ -174,8 +178,10 @@ class ResultPage extends Component {
                                     checked={this.state.housingType === 'house'}
                                     onChange={this.handleHousingTypeChange}
                                 />
-                                </Form.Field>
-                                <Form.Field>
+                                </Grid.Column>
+                                <Grid.Column>
+                                {/* </Form.Field>
+                                <Form.Field> */}
                                 <Checkbox
                                     radio
                                     label='오피스텔'
@@ -184,13 +190,15 @@ class ResultPage extends Component {
                                     checked={this.state.housingType === 'officetel'}
                                     onChange={this.handleHousingTypeChange}
                                 />
-                                </Form.Field>
-                            </Form>
-                        </Grid.Column>
+                                {/* </Form.Field>
+                            </Form> */}
+                            </Grid.Column>
+                        </Grid.Row>
 
-                        <Grid.Column>
-                            <Form>
-                                <Form.Field>
+                        <Grid.Row columns={3} style={{padding:5}}>
+                            {/* <Form>
+                                <Form.Field> */}
+                                <Grid.Column>
                                 <Checkbox
                                     radio
                                     label='매매'
@@ -199,8 +207,10 @@ class ResultPage extends Component {
                                     checked={this.state.dealType === 'bargain'}
                                     onChange={this.handleDealTypeChange}
                                 />
-                                </Form.Field>
-                                <Form.Field>
+                                </Grid.Column>
+                                {/* </Form.Field>
+                                <Form.Field> */}
+                                <Grid.Column>
                                 <Checkbox
                                     radio
                                     label='전세'
@@ -209,8 +219,10 @@ class ResultPage extends Component {
                                     checked={this.state.dealType === 'charter'}
                                     onChange={this.handleDealTypeChange}
                                 />
-                                </Form.Field>
-                                <Form.Field>
+                                </Grid.Column>
+                                {/* </Form.Field>
+                                <Form.Field> */}
+                                <Grid.Column>
                                 <Checkbox
                                     radio
                                     label='월세'
@@ -219,16 +231,18 @@ class ResultPage extends Component {
                                     checked={this.state.dealType === 'rent'}
                                     onChange={this.handleDealTypeChange}
                                 />
-                            </Form.Field>
-                        </Form>
-
+                            {/* </Form.Field>
+                        </Form> */}
                         </Grid.Column>
+                        </Grid.Row>
 
-                        <Grid.Column>
+                        {/* <Grid.Column> */}
+                        {/* </Grid.Column> */}
+                        <Grid.Row centered style={{padding:3}}>
                             <Button onClick = {this.clickSearchButton} > 조회 </Button>
-                        </Grid.Column>
-
+                        </Grid.Row>
                     </Grid>
+                    
                     
 
                     

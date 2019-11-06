@@ -44,6 +44,7 @@ class detailPage extends Component {
             boardNo: selectedPost.no,
             content: this.state.inputData
         }
+        
         this.props.replySubmit(data);
 
         this.setState({

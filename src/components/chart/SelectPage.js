@@ -19,7 +19,6 @@ resultRenderer.propTypes = {
   value: PropTypes.string,
 }
 
-
 class SelectPage extends Component {
     constructor(props) {
         super(props);

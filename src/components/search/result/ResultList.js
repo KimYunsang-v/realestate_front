@@ -53,7 +53,7 @@ class ResultList extends Component {
                 </Grid.Column> */}
                 <List.Icon size='large' verticalAlign='middle' src={housingImage} />
                 <List.Header>
-                    <font color="grey"><h4>{address} {dong} {name}  {floor}층 </h4></font>                    
+                    <font color="grey"><h4>{name}  {floor}층 </h4></font>                    
                 </List.Header>
                 <List.Content>
                     {deposit?(<font color="orange">{deposit}/{price}</font>):(<font color="orange">{price}</font>)}만원
