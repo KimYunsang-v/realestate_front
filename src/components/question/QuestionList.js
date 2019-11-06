@@ -12,7 +12,7 @@ class QuestionList extends Component {
         author: '',
         boardNo: ''
     }
-    
+
     //팝업 창 닫기 설정
     closeConfigShow = ( closeOnDimmerClick ) => () => {
         this.setState({ closeOnDimmerClick, open: true })
@@ -57,49 +57,15 @@ class QuestionList extends Component {
         const city = regionData.city;
 
         console.log(city);
-        
-        // const cityList = city.map((city, key) => (
-        //     <List.Item key={key}>
-        //         <List.Content>{city.text}</List.Content>
-        //     </List.Item>
-        // ))
 
         return(
             <div>
-                {/* <Segment floated={"left"}>
-                    <List>
-                        {cityList}
-                    </List>
-                </Segment> */}
-
-            {/* 새로운 글 팝업 */}
-                {/* <Segment floated={"right"}> */}
-                    {/* <Button color='olive' onClick={this.closeConfigShow(false)}>글쓰기</Button> */}
-                    <Modal
-                        size='tiny'
-                        open={open}
-                        closeOnDimmerClick={closeOnDimmerClick}
-                        onClose={this.close}
-                    >
-                        <Modal.Content>
-                            <h2>게시물 작성</h2>
-                            <Input onChange={this.inputChangeTitle} fluid placeholder='Title'/>
-                            <Form size='massive'><Form.TextArea onChange={this.inputChangeContents} placeholder='Contents'/></Form>
-                        </Modal.Content>
-
-                        <Modal.Actions>
-                            <Button onClick={this.submitClick} positive>Submit</Button>
-                            <Button onClick={this.close} negative>Cancle</Button>
-                        </Modal.Actions>
-                    </Modal>
-
                 {/* 게시글 */}
                     <Table selectable>
                         <Table.Header>
                             <Table.Row textAlign='center'>
-                                {/* <Table.HeaderCell width="2">no</Table.HeaderCell> */}
-                                <Table.HeaderCell width="5">작성자</Table.HeaderCell>
-                                <Table.HeaderCell width="6">제목</Table.HeaderCell>                                
+                                <Table.HeaderCell width="2">작성자</Table.HeaderCell>
+                                <Table.HeaderCell width="4">제목</Table.HeaderCell>                                
                                 <Table.HeaderCell width="5">작성일</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
@@ -108,10 +74,9 @@ class QuestionList extends Component {
                         {
                             items.map( (post) => {
                             return (
-                                <Table.Row textAlign='center' key={post.no}>
-                                    {/* <Table.Cell>{contact.no - 6}</Table.Cell> */}
+                                <Table.Row textAlign='center' key={post.no} selectable onClick={() => this.props.listClickEvent(post)}>
                                     <Table.Cell>{post.author}</Table.Cell>
-                                    <Table.Cell selectable onClick={() => this.props.listClickEvent(post)}>
+                                    <Table.Cell>
                                             {post.title}
                                     </Table.Cell>
                                     <Table.Cell>{post.registerDate}</Table.Cell>
@@ -120,15 +85,7 @@ class QuestionList extends Component {
                         })}
 
                         </Table.Body>
-                        <Table.Footer>
-                            <Table.Row textAlign='center'>
-                                <Table.HeaderCell colSpan='4'>
-                                {/* <Pagination items={items} onChangePage={onChangePage}/> */}
-                                </Table.HeaderCell>
-                            </Table.Row>
-                        </Table.Footer>
                     </Table>   
-                {/* </Segment> */}
             </div>
         )
     }

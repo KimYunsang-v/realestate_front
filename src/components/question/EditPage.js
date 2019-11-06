@@ -14,6 +14,10 @@ class editPage extends Component {
             [name] : e.target.value
         })
     }
+
+    listBtnClickListener = () => {
+        this.props.setMainComponent('listComponent');
+    }
     
     saveBtnOnClickListener = () => {
         const data = {
@@ -58,25 +62,12 @@ class editPage extends Component {
                                 onChange={(e) =>this.onChangeListener(e, 'content')} style={{height: 300}}/>
                     </Form>
 
-                    <Header/>                     
+                    <Header/>
 
-                    <Button>뒤로가기</Button>
+                    <Button onClick = {() => this.listBtnClickListener()}>뒤로가기</Button>
                     <Button onClick={() => this.saveBtnOnClickListener()}>저장</Button>
                 </Segment>
             </Container>
-
-            // <Table>
-            //     <Table.Header>
-            //         {this.title}
-            //     </Table.Header>
-            //     <Table.Body>
-            //         {this.content}
-            //         <Comment></Comment>
-            //     </Table.Body>
-            //     <Table.Footer>
-            //         <Button>뒤로가기</Button>
-            //     </Table.Footer>
-            // </Table>
         );
     }
 }

@@ -10,15 +10,6 @@ class Community extends Component {
         super();
         this.state = {
             dataList: [],
-            // pageOfItems: [],
-            // detailBoardItems: {
-            //     title: '',
-            //     content: '',
-            //     author: '',
-            //     no: 0,
-            //     answers: [],
-            //     registerDate: ''
-            // },
             open: false,
             closeOnDimmerClick: true,
             inputData: '',
@@ -39,14 +30,6 @@ class Community extends Component {
         // Pagination 페이지 이동 시 데이터 셋팅
         this.setState({ page: page });
     }
-
-    // setCity = (city) => {
-    //     this.setState({city : city})
-    // }
-
-    // setDistrict = (district) => {
-    //     this.setState({district : district})
-    // }
 
     componentDidMount() {
         var userid=''
@@ -70,7 +53,7 @@ class Community extends Component {
         if(mainComponent === 'editComponent'){            
             return( 
                 <Grid.Column width={13}>
-                    <EditPage city={this.state.city} district={this.state.district} user={this.state.user} handleSubmit={this.handleSubmit}/>                
+                    <EditPage city={this.state.city} district={this.state.district} user={this.state.user} handleSubmit={this.handleSubmit} setMainComponent = {this.setMainComponent}/>                
                 </Grid.Column>
              )
         } else if (mainComponent === 'detailComponent') {
@@ -137,22 +120,6 @@ class Community extends Component {
         }
     }
 
-    // 게시글 세부 내용 데이터 get
-    // detailBoardData = (data) => {
-    //     try{
-    //         console.log("getDatailBoard")
-    //         //const detailInfo = await service.getDetailBoard(boardNo);
-    //         // console.log(detailInfo.data)
-    //         this.setState({
-    //             detailBoardItems : data,
-    //             open: true,
-    //             closeOnDimmerClick: false
-    //         });
-    //     }catch(e){
-    //         console.log(e)
-    //     }
-    // }
-
     // 댓글 내용 입력 시
     inputChange = (e) => {
         this.setState({
@@ -163,15 +130,6 @@ class Community extends Component {
     // 댓글 post
     replySubmit = async (data) => {
         try{
-            // const {no} = this.state.detailBoardItems
-            // const data = []
-            // const {inputData} = this.state
-            // if(inputData !== ''){
-            //     data.push({
-            //         author: this.state.user,
-            //         boardNo: no,
-            //         content: inputData
-            //     });
             const response = await service.postNewReply(data);
             console.log(response.data)
             this.setState({
@@ -212,8 +170,6 @@ class Community extends Component {
 
     //새로운 게시글 post
     handleSubmit = async (data) => {        
-        // data[0]['city'] = this.state['city'];
-        // data[0]['district'] = this.state['district'];
         console.log(data)
         const responseInfo = await service.postNewContent(data);
         console.log(responseInfo)
@@ -243,28 +199,10 @@ class Community extends Component {
         const style1 = {
             margin: '5rem 16rem 16rem'
         };
-        // const {title, content, answers} = this.state.detailBoardItems
         const {open, closeOnDimmerClick} = this.state
 
 
         var mainComponent = this.componentChangeListener();
-
-        // if(component === 'editComponet'){
-        //     mainComponent = <EditPage city={this.state.city} district={this.state.district} user={this.state.user} />
-        // } else if (component === 'detailComponet') {
-        //     mainComponent = <DetailPage boardItem={data}/>
-        // } else if (component === 'listComponent') {
-        //     mainComponent = <QuestionList
-        //     handleSubmit={this.handleSubmit}
-        //     // boardData={this.state}
-        //     items={this.state.dataList}
-        //     onChangePage={this.onChangePage}
-        //     detailBoardData={this.detailBoardData}
-        //     user = {this.state.user}
-        //             />
-        // } else {
-        //     return null;
-        // }
         
 
         return (
@@ -276,58 +214,6 @@ class Community extends Component {
                     </Segment>
                 </Grid.Column>
                     {mainComponent}
-                
-                
-                {/* <Modal
-                    open={open}
-                    closeOnDimmerClick={closeOnDimmerClick}
-                    onClose={this.close}
-                >
-                    <Modal.Header>
-                        {title}
-                    </Modal.Header>
-                    <Modal.Content>
-                        {content}
-                    </Modal.Content>
-                    <Modal.Content>
-                        <Divider/>
-                        <Comment.Group>
-                            <Header> Comments </Header> */}
-                                {
-                                    // answers.map( (contact,i) => {
-                                    //     return (
-                                    //         <Comment key={i}>
-                                    //             <Comment.Content>
-                                    //                 <Comment.Author as='a'>{contact.author}</Comment.Author>
-                                    //                 <Comment.Metadata>{contact.registerDate}</Comment.Metadata>
-                                    //                 <Comment.Text>{contact.content}</Comment.Text>
-                                    //             </Comment.Content>
-                                    //             <Comment.Actions>
-                                    //                 <Comment.Action onClick={this.replyDelete.bind(this,contact.no)}>delete</Comment.Action>
-                                    //                 {/* delete */}
-                                    //             </Comment.Actions>
-                                    //         </Comment> 
-                                    //     );
-                                    // })
-                                }
-                            {/* <Form reply>
-                                <Form.TextArea onChange={this.inputChange} 
-                                                value={this.state.inputData}/>
-                                <Button 
-                                    content='Add Reply' 
-                                    labelPosition='left' 
-                                    icon='edit'
-                                    primary 
-                                    onClick={this.replySubmit}
-                                />
-                            </Form>
-                        </Comment.Group>
-                    </Modal.Content>
-                    <Modal.Actions>
-                        <Button icon='trash' negative onClick={this.handleDelete} />
-                        <Button onClick={ this.close } primary>뒤로가기</Button>
-                    </Modal.Actions>
-                </Modal> */}
             </Grid> 
             </Segment>
         )
