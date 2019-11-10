@@ -3,13 +3,11 @@ import { Route, Switch } from 'react-router-dom';
 import {Chart} from '../components/chart'
 import {Home} from '../components/home'
 import {Search} from '../components/search'
-import {Question, Menu} from 'components/pages';
+import {Menu} from 'components/pages';
 import Community from '../components/question/Community'
 import Login from 'components/login/Login'
 
 class App extends Component {
-
-
     state = {
         token : ''
     }

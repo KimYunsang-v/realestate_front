@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
-import UserPage from '../userPage/UserPage';
 
 class LoginForm extends Component {
   state = {
@@ -31,12 +30,6 @@ class LoginForm extends Component {
         password: this.state.pw
     });
     this.props.signInListener(data);
-
-    // this.setState({
-    //   id: '',
-    //   name:'',
-    //   pw: '',
-    // })    
   }
 
   signUpBtnListener=()=>{
@@ -81,7 +74,7 @@ class LoginForm extends Component {
                                 name="pw"
                                 value={this.state.pw} onChange={this.handlechangeListener}
                             />
-                            <Button color='teal' fluid size='large' onClick={this.loginBtn}>
+                            <Button color='teal' fluid size='large' onClick={this.loginBtnEventListener}>
                                 로그인
                             </Button>
                         </Segment>
@@ -131,52 +124,6 @@ class LoginForm extends Component {
             </Modal>
 
         </Segment>
-    //   <div>
-    //     {isLogin ? (
-    //       <div>
-    //         <h1>환영합니다.</h1>
-    //         <UserPage userInfo ={this.state}/>
-    //         <Button color='olive' onClick={this.logoutBtn}>로그아웃</Button>
-    //       </div>
-    //     ) : (
-    //       <div className='login-form' >
-    //         <style>{`
-    //               body > div,
-    //               body > div > div,
-    //               body > div > div > div.login-form {
-    //               height: 90%;}`}
-    //         </style>
-    //         <Grid textAlign='center' style={{ margin: '1rem', height: '100%' }} verticalAlign='top'>
-    //           <Grid.Column style={{ maxWidth: 450 }}>
-    //             <Header as='h2' color='teal' textAlign='center'>
-    //               로그인
-    //             </Header>
-    //             <Form size='large'>
-    //               <Segment stacked>
-    //                 <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'
-    //                   name="id" value={this.state.id} onChange={this.handlechange} />
-    //                 <Form.Input
-    //                   fluid
-    //                   icon='lock'
-    //                   iconPosition='left'
-    //                   placeholder='Password'
-    //                   type='password'
-    //                   name="pw"
-    //                   value={this.state.pw} onChange={this.handlechange}
-    //                 />
-    //                 <Button color='teal' fluid size='large' onClick={this.loginBtn}>
-    //                   로그인
-    //                     </Button>
-    //               </Segment>
-    //             </Form>
-    //             <Message>
-    //               <Button onClick={this.closeConfigShow(true, false)}>가입하기</Button>
-    //             </Message>
-    //           </Grid.Column>
-    //         </Grid>
-    //       </div>
-    //     )}
-        
     )
   }
 }

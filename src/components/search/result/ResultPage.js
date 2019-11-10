@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
-import { Input, Divider, Button, Dropdown, Segment, Grid, Image, List, Header, Icon, Pagination, Form, Checkbox, Container } from 'semantic-ui-react'
+import { Divider, Button, Segment, Grid, List, Header, Icon, Pagination, Checkbox} from 'semantic-ui-react'
 import ResultList from './ResultList';
-import noData from '../../../image/noData.png'
-// import Pagination from './Pagination';
 
 const houseoptions = [
     { key: 'APART', text: '아파트', value: 'apart' },
@@ -17,16 +15,6 @@ const dealoptions = [
     { key: 'LEASE', text: '전세', value: 'charter' },    
     { key: 'MONTH', text: '월세', value: 'rent' },
 ]
-
-const renderLabel = label =>({
-    color:'blue',
-    content :`${label.text}`
-})
-
-const renderLabel2 = label =>({
-    color:'pink',
-    content :`${label.text}`
-})
 
 class ResultPage extends Component {
     static defaultProps = {
@@ -42,24 +30,10 @@ class ResultPage extends Component {
             paging : 1
         }
     }
-
-    //house
-    // handleAdditionHouseType = (e, { value }) => {
-    //     this.setState({
-    //      houseoptions: [{ text: value, value }, ...this.state.options],
-    //     });
-    // }
     
     handleChangeHouseType = (e, { value }) => {
         this.setState({ housingType : value })
     }
-
-    //deal
-    // handleAdditionDealType = (e, { value }) => {
-    //     this.setState({
-    //      dealoptions: [{ text: value, value }, ...this.state.options],
-    //     });
-    // }
 
     handleChangeDealType = (e, { value }) => {
         this.setState({ dealType : value })
@@ -103,21 +77,12 @@ class ResultPage extends Component {
     }
 
     render() {
-        //const { pageOfItems } = this.props.resultData;
-        //const { items,onChangePage } = this.props;
-        // const list = pageOfItems.map(
-        //     info => (
-        //         <ResultList key={info.no}
-        //             info={info} />
-        //     )
-        // );
         const { resultData }  = this.props;
 
         const {paging} = this.state.paging
         console.log("result page rendering")
 
         console.log(resultData)
-        //const dataList = [];
         var dataList = '';
 
         if(resultData){
@@ -130,7 +95,7 @@ class ResultPage extends Component {
 
         var resultSegment = '';
 
-        if(dataList.length != 0){
+        if(dataList.length !== 0){
             resultSegment = (
                 <Segment raised style={{overflow: 'auto', height: 480 }}>
                     <List selection divided relaxed> {dataList} </List>    
@@ -147,7 +112,7 @@ class ResultPage extends Component {
         else {
             resultSegment = (
                 <Segment placeholder piled style={{ height: 480, marginTop:20 }}>
-                    {/* <Image src={noData} size='small'/> */}
+                    
                     <Header icon>
                         <Icon name='search'/>
                         데이터가 없습니다.
@@ -161,8 +126,7 @@ class ResultPage extends Component {
                 <Segment>
                     <Grid>
                         <Grid.Row columns={3} style={{padding:5}} centered>
-                            {/* <Form>
-                                <Form.Field> */}
+
                                 <Grid.Column style={{padding : '5px'}} width={4}>
                                     <Checkbox                                        
                                         radio
@@ -172,8 +136,6 @@ class ResultPage extends Component {
                                         checked={this.state.housingType === 'apart'}
                                         onChange={this.handleHousingTypeChange}
                                     />
-                                {/* </Form.Field>
-                                <Form.Field> */}
                                 </Grid.Column>
                                 <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
@@ -186,8 +148,7 @@ class ResultPage extends Component {
                                 />
                                 </Grid.Column>
                                 <Grid.Column  style={{padding : '5px'}} width={4}>
-                                {/* </Form.Field>
-                                <Form.Field> */}
+
                                 <Checkbox
                                     radio
                                     label='오피스텔'
@@ -196,16 +157,13 @@ class ResultPage extends Component {
                                     checked={this.state.housingType === 'officetel'}
                                     onChange={this.handleHousingTypeChange}
                                 />
-                                {/* </Form.Field>
-                            </Form> */}
                             </Grid.Column>
                         </Grid.Row>
 
                         <Divider style={{ margin : 0}}/>
 
                         <Grid.Row columns={3} style={{padding:5}} centered>
-                            {/* <Form>
-                                <Form.Field> */}
+
                                 <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
                                     radio
@@ -216,8 +174,7 @@ class ResultPage extends Component {
                                     onChange={this.handleDealTypeChange}
                                 />
                                 </Grid.Column>
-                                {/* </Form.Field>
-                                <Form.Field> */}
+
                                 <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
                                     radio
@@ -228,8 +185,7 @@ class ResultPage extends Component {
                                     onChange={this.handleDealTypeChange}
                                 />
                                 </Grid.Column>
-                                {/* </Form.Field>
-                                <Form.Field> */}
+
                                 <Grid.Column style={{padding : '5px'}} width={4}>
                                 <Checkbox
                                     radio
@@ -239,50 +195,19 @@ class ResultPage extends Component {
                                     checked={this.state.dealType === 'rent'}
                                     onChange={this.handleDealTypeChange}
                                 />
-                            {/* </Form.Field>
-                        </Form> */}
+
                         </Grid.Column>
                         </Grid.Row>
 
                         <Divider style={{ margin : 0}}/>
 
-                        {/* <Grid.Column> */}
-                        {/* </Grid.Column> */}
                         <Grid.Row centered style={{padding:3}}>
                             <Button onClick = {this.clickSearchButton} > 조회 </Button>
                         </Grid.Row>
                     </Grid>
                     
-                    
-
-                    
-                    {/* <Dropdown
-                        options={this.state.houseoptions}
-                        placeholder="집 타입"
-                        // defaultValue = {this.state.houseoptions[0].text}
-                        search
-                        selection
-                        onChange={this.handleChangeHouseType}
-                        renderLabel={renderLabel}
-                    />
-                                
-                    <Dropdown
-                        options={this.state.dealoptions}
-                        placeholder="거래 타입"
-                        // defaultValue = {this.state.dealoptions[0].text}
-                        search
-                        selection
-                        onChange={this.handleChangeDealType}
-                        renderLabel={renderLabel2}
-                    />
-                 */}
-                
-                    
                     </Segment>
                     {resultSegment}  
-
-                    
-
             </Segment>
         
         );

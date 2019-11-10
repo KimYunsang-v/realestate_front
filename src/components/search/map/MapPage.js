@@ -1,6 +1,6 @@
 /*global daum*/
 import React, {Component} from 'react';
-import { Input, Divider, Button, Dropdown, Popup, Grid, Image, Segment, Step, Statistic, Header } from 'semantic-ui-react'
+import { Input, Grid,Segment, Header } from 'semantic-ui-react'
 import './MapPage.css';
 
 var map = null;
@@ -28,19 +28,7 @@ class MapPage extends Component {
         };
 
         map = new daum.maps.Map(el, options); //지도 생성 및 객체 리턴
-
-        //this.props.kakaoPlacesSearch('정릉동');
     }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-
-    //     if(this.props.searchData === nextProps.searchData && this.props.markerData ){
-    //         console.log("shouldComponentUpdate");
-    //         return true;
-    //     }else {
-    //         return  false;
-    //     }
-    // }
 
     componentWillUpdate(nextProps){
         if(this.props.markerData === nextProps.markerData){
@@ -104,49 +92,19 @@ class MapPage extends Component {
     }
 
     render() {
-        // let Loading;
-
-        // const loading = this.props.loading;
-
-        // const { latitude, longitude } = this.props.searchData;
-        
         console.log("map rendering");
-
-        // if(latitude && longitude){
-        //     this.setBounds(latitude, longitude);
-        // }
-        
-        // if(loading) {
-        //     Loading = <img src="//s.zigbang.com/v1/web/search/loading2.gif" alt="" className="loadingShow"></img>
-        // } else {
-        //     Loading = <img src="//s.zigbang.com/v1/web/search/loading2.gif" alt="" className="loadingHide"></img>
-        // }
 
         return (
             <Segment basic>
-                {/* <Segment style = {{ padding : 20 }}> */}
                     <Grid columns={2} horizontal>
                         <Grid.Column basic width={8} style={{ paddingTop : 0}}>
                             <Input style={{ width : '100%', height: '50px', fontSize: 20}} icon='search' placeholder='지역이나 역명' onChange={this.searchChange} 
                                         value={this.state.inputSearch} onKeyDown={this.keyPress} />
-                        {/* <Step.Group>
-                            <Step>
-                                <Step.Title>현재 검색 지역</Step.Title>
-                                <Step.Description>{this.state.searchRegion}</Step.Description>
-                            </Step>
-                        </Step.Group> */}
                         </Grid.Column>
                         <Grid.Column textAlign='center' width={3} textAlign="center">
                             <Header as='h2' icon='building outline' content={this.state.searchRegion} />
-                            {/* <Statistic size='tiny' color='black'>
-                                <Statistic.Value>{this.state.searchRegion}</Statistic.Value>
-                                {/* <Statistic.Label>현재 검색 지역</Statistic.Label>
-                            </Statistic> */}
                         </Grid.Column>
                     </Grid>
-                {/* </Segment> */}
-
-                {/* <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=52b39c47d2be0c937abcae9bafe0bd16"></script> */}
                 <Segment id="map" className="mapStyle" style={{ width : '100%', height: '550px'}}/>
                 
             </Segment>

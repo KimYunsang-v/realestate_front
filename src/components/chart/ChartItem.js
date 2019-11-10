@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts';
-import noData from '../../image/noData.png'
-import {Image, Segment, Header, Icon} from 'semantic-ui-react';
+import {Segment, Header, Icon} from 'semantic-ui-react';
 
 class ChartItem extends Component {
 
@@ -109,17 +108,6 @@ class ChartItem extends Component {
                 </Segment>
             )
         }
-
-        
-        //const xAxisList = Object.keys(apart);
-        
-        // console.log(xAxisList);
-        // apartDataList = Object.values(apart);
-        // officetelDataList = Object.values(officetel);
-        // housetDataList = Object.values(house);
-        
-        
-        
         return( 
             <div sytle={style}>
                 {renderItem}

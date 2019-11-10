@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { QuestionList, EditPage, DetailPage } from './';
 import * as service from '../../lib/boardApi';
-import { Modal, Button, Comment, Header, Form, Divider, Segment, Grid, Container } from 'semantic-ui-react';
+import {Button, Segment, Grid } from 'semantic-ui-react';
 import RegionTreeView from './RegionTreeView';
-import { district } from '../chart/SelectData';
 
 class Community extends Component {
     constructor() {
@@ -32,18 +31,10 @@ class Community extends Component {
     }
 
     componentDidMount() {
-        var userid=''
-        // if(sessionStorage.getItem("user")===null){
-        //     alert("로그인 후 이용할 수 있습니다.");
-        //     this.props.history.push("/login");
-        // }else{
-            //userid=sessionStorage.getItem("user").split(":")
-            userid="윤상"
-            this.setState({
-                user:userid[0]
-            })
-            // this.boardData()
-        // }
+        var loginInfo = window.$loginInfo;
+
+        console.log(loginInfo)
+
         this.componentChangeListener("listComponent", "");
     }
 
@@ -53,7 +44,7 @@ class Community extends Component {
         if(mainComponent === 'editComponent'){            
             return( 
                 <Grid.Column width={13}>
-                    <EditPage city={this.state.city} district={this.state.district} user={this.state.user} handleSubmit={this.handleSubmit} setMainComponent = {this.setMainComponent}/>                
+                    <EditPage city={city} district={district} user={this.state.user} handleSubmit={this.handleSubmit} setMainComponent = {this.setMainComponent}/>                
                 </Grid.Column>
              )
         } else if (mainComponent === 'detailComponent') {
@@ -65,15 +56,13 @@ class Community extends Component {
         } else if (mainComponent === 'listComponent') {
             
             return( 
-                <Grid.Column width={13}>    
+                <Grid.Column width={13}>
                     <Button color="olive" onClick = {() => this.setMainComponent('editComponent')} style={{marginBottom: 10}}> 글쓰기 </Button>                
                     <QuestionList
                         handleSubmit={this.handleSubmit}
-                        // boardData={this.state}
                         items={this.state.dataList}
                         onChangePage={this.onChangePage}
                         listClickEvent = {this.listClickEvent}
-                        //detailBoardData={this.detailBoardData}
                         user = {this.state.user}/>
                 </Grid.Column>                
              )
@@ -82,11 +71,22 @@ class Community extends Component {
         }
     }
 
-    setMainComponent = (component) => {
+    setMainComponent = (component) => {      
+
+
         const {city, district} = this.state;
         if(component === 'editComponent' && !city || !district){
             return alert('지역을 선택해주세요')
         }
+        
+        if(component === 'editComponent' && window.$loginInfo === ''){
+            return alert('로그인 해주세요')
+        } else if(component === 'editComponent' && window.$loginInfo) {
+            this.setState ({
+                user : window.$loginInfo['name']
+            })
+        }
+
         this.setState({
             mainComponent : component
         })
@@ -136,7 +136,6 @@ class Community extends Component {
                 selectedPost : response.data,
                 mainComponent : 'detailComponent'
             })
-            //this.detailBoardData(no);   //리로딩
             
         }catch(e){
             console.log(e)
@@ -177,7 +176,6 @@ class Community extends Component {
             dataList : responseInfo.data,
             mainComponent : 'listComponent'
         })
-        //this.getBoardData();   //리로딩
     }
 
     // 게시글 삭제 post
@@ -196,12 +194,6 @@ class Community extends Component {
     }
     
     render() {
-        const style1 = {
-            margin: '5rem 16rem 16rem'
-        };
-        const {open, closeOnDimmerClick} = this.state
-
-
         var mainComponent = this.componentChangeListener();
         
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Comment, Button, Segment, Form, TextArea, Grid, Header, Container, Divider, Label, Icon, List, Input} from 'semantic-ui-react';
+import {Button, Segment, Container, Divider, Label, Icon, List, Input} from 'semantic-ui-react';
 
 class detailPage extends Component {
     _isMounted = false
@@ -7,27 +7,6 @@ class detailPage extends Component {
         title: '',
         content: '',        
     }
-
-    componentDidMount() {
-       // this.setData()
-        // this._isMounted = true
-    }
-
-    componentWillUnmount() {
-        // this._isMounted = false
-        // this.setData()
-    }
-    
-    // setData = () => {
-    //     const detailBoardItems = this.props
-    //     console.log(detailBoardItems)
-    //     if(this._isMounted){
-    //         this.setState({
-    //             title: detailBoardItems.title,
-    //             content: detailBoardItems.content
-    //         })
-    //     }
-    // }
 
     listBtnClickListener = () => {
         this.props.setMainComponent('listComponent');
@@ -89,8 +68,6 @@ class detailPage extends Component {
                             </Label>
                         </Container>
                         <Divider/>
-                    
-                    {/* <Segment style={{height : '400px'}}> */}
                         <Container as='p' style={{height:'400px'}}>{selectedPost.content}</Container>                        
                             {answerList}
 
@@ -101,22 +78,6 @@ class detailPage extends Component {
 
                     </Segment>
             </Container>
-
-
-
-
-            // <Table>
-            //     <Table.Header>
-            //         {this.title}
-            //     </Table.Header>
-            //     <Table.Body>
-            //         {this.content}
-            //         <Comment></Comment>
-            //     </Table.Body>
-            //     <Table.Footer>
-            //         <Button>뒤로가기</Button>
-            //     </Table.Footer>
-            // </Table>
         );
     }
 }

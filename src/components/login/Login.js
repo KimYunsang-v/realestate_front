@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import LoginForm from './LoginForm';
 import * as service from '../../lib/LoginApi';
 
-class Login extends Component {
+class Login extends React.Component {
   state={
     id:'',
     pw:'',
-    // isLogin: sessionStorage.getItem("user")===null?false:true
+    loginInfo : {
+      name : '',
+      jwt : '',
+    },
   }
   
   signInListener = async(data)=>{
@@ -17,22 +20,21 @@ class Login extends Component {
 
       console.log(logininfo);
 
-      // sessionStorage.setItem("user", logininfo.data);
-      
-    //   if(logininfo.status === 200){
-    //     this.setState({
-    //       isLogin: true
-    //     });
-    //   }else {
-    //     this.setState({
-    //       isLogin: false
-    //     });
-    //   }      
-    // }catch(e){
-    //   console.log(e)
+      this.setState({
+        loginInfo : {
+          name : data[0]['userId'],
+          jwt : logininfo.data,
+        }
+      })
+
+      // let history = useHistory();
+      window.$loginInfo = this.state.loginInfo;
+
+      this.props.history.push('/');
+
     }catch(e){
         console.log(e)
-    }
+    }    
   }
   
   signUpListener = async (data) => {
@@ -47,18 +49,16 @@ class Login extends Component {
   }
 
   logoutListener = () => {
-
-    // this.setState({
-    //   isLogin: false
-    // });
+    window.$loginInfo = '';
   }
 
   render() {
     return (
       <div id="login">
         <LoginForm signInListener={this.signInListener} signUpListener={this.signUpListener} logoutListener={this.logoutListener}></LoginForm>
-      </div>
+      </div>     
     )
   }
 }
+
 export default Login;

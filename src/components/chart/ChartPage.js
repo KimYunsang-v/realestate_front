@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ChartItem from './ChartItem';
 import {Grid, Segment, GridColumn} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
-import { PassThrough } from 'stream';
 
 class ChartPage extends Component {
     render() {

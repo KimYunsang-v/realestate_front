@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Button, Container, Label, Breadcrumb, List, Segment, Grid } from 'semantic-ui-react';
+import {Button, Container,Breadcrumb, List, Segment} from 'semantic-ui-react';
 import * as data from '../chart/SelectData';
-import { PassThrough } from 'stream';
 
 const regionTreeData = data.districtInfo;
 
@@ -37,11 +36,7 @@ class RegionTreeView extends Component {
         });
         this.props.getBoardData(this.state.city, this.state.district)
     }
-
     
-
-        
-
     clickBackBtn = () => {
         this.setState({
             city : '',

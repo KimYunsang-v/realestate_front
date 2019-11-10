@@ -19,15 +19,6 @@ const con = {
         verticalAlign: 'middle'
     },
 
-    // plotOptions: {
-    //     series: {
-    //         label: {
-    //             connectorAllowed: false
-    //         },
-    //         pointStart: 2010
-    //     }
-    // },
-
     series: [{
         name: '오피스텔',
         data: [26, 43, 23, 34, 54, 13, 45, 23]

@@ -1,6 +1,5 @@
 /*global daum*/
 import React, {Component} from 'react';
-import SearchPage from './SearchPage';
 import MapPage from './map/MapPage';
 import ResultPage from './result/ResultPage';
 import '../pages/Page.css';
@@ -27,23 +26,15 @@ class Search extends Component {
         selectedBuilding : ''
     };
 
-    // constructor(){
-    //     this.searchData('정릉동');
-    // }
-
     // default값으로 지도 보여주기
     componentDidMount() {
         console.log("Search > componentDidMount");
-        //this.kakaoPlacesSearch(inputData);
     }
 
     //SearchPage에서 검색
     //동으로 검색
     searchDataListener = async (searchData) => {
         console.log("Search > searchDataSet");
-        //const {housingTypeData, dealTypeData, inputData, options} = data[0];
-
-        // this.kakaoPlacesSearch(searchData);
         console.log(searchData);
 
         delete searchData['address'];
@@ -108,6 +99,7 @@ class Search extends Component {
         }
     }
 
+    // 마커 데이터 세팅
     setMarkerData = (data) => {
         this.setState({
             markerData : {
@@ -117,6 +109,7 @@ class Search extends Component {
         });
     }
 
+    // 검색 데이터 세팅
     setSearchData = (data) => {
         this.setState({
             resultData : '',
@@ -127,8 +120,8 @@ class Search extends Component {
         });
     }
 
+    // 페이지 변경 
     onChangePage = (pageOfItems) => {
-        // update state with new page of items
         this.setState({ pageOfItems : pageOfItems });
     }
 

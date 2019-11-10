@@ -1,6 +1,5 @@
 import React,{ Component } from 'react';
-import { Table, Button, Modal, Input, Form, Segment, Menu, List } from 'semantic-ui-react';
-import { Pagination } from './';
+import { Table } from 'semantic-ui-react';
 import * as regionData from '../chart/SelectData';
 
 class QuestionList extends Component {
@@ -49,10 +48,7 @@ class QuestionList extends Component {
     }
 
     render() {
-        const {open,closeOnDimmerClick} = this.state
-        //부모 컴포넌트에서 게시판 데이터 받아옴
-        const {pageOfItems} = this.props.items
-        const {items,onChangePage,detailBoardData} = this.props
+        const {items} = this.props
 
         const city = regionData.city;
 

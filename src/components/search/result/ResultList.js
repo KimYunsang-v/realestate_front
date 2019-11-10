@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { Grid, Image, Segment, Label, List } from 'semantic-ui-react';
+import { Grid, List } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './ResultPage.css';
-
-const hosingType=[
-    {value :require('../../../image/apart.png')},
-    {value :require('../../../image/officetel.PNG')},
-    {value :require('../../../image/house.jpg')}
-]
 
 class ResultList extends Component {
     static defaultProps = {
@@ -35,22 +29,12 @@ class ResultList extends Component {
 
 
     render() {
-        const {address, dong, name, area, floor, type, price, deposit, dealType} = this.props.info
-        var housingImage= ''
-        if(type==='apart'){
-            housingImage=hosingType[0].value
-        }else if(type==='officetel'){
-            housingImage=hosingType[1].value
-        }else {
-            housingImage=hosingType[2].value
-        }
+        const {name, area, floor, price, deposit} = this.props.info
+        
 
         return (
                 
             <List.Item style={{height: 65 }} onClick={this.itemClickListener} verticalAlign='center' >
-                {/* <Grid.Column width={4}>
-                    
-                </Grid.Column> */}
                 <List.Icon size='large' verticalAlign='middle' name='building' />                
                 <List.Content>
                     <List.Header>
@@ -59,8 +43,7 @@ class ResultList extends Component {
                     {deposit?(<font color="orange">{deposit}/{price}</font>):(<font color="orange">{price}</font>)}만원
                     <h4 className="title">({area}㎡)</h4>
                 </List.Content>
-                <Grid.Column width={9}>
-                {/* <Label circular>{dealType}</Label> */}                       
+                <Grid.Column width={9}>                      
                 </Grid.Column>
             </List.Item>
             

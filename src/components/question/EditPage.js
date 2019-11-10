@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Comment, Button, Segment, Form, TextArea, Label, Message, Container, Input, Grid, Header } from 'semantic-ui-react';
+import {Button, Segment, Form, TextArea,  Message, Container, Input,Header } from 'semantic-ui-react';
 
 
 class editPage extends Component {
