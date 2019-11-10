@@ -114,7 +114,7 @@ class SelectPage extends Component {
                                         value={inputText}
                                         resultRenderer={resultRenderer}
                                         {...this.props}
-                                        style={{width: '100%', height: '50px', fontSize:20}}
+                                        style={{width: '100%', height: '50px', fontSize:20}}                                        
                                     />
                             </Grid.Column>
 

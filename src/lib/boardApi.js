@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 
-const baseUrl = "http://localhost:8080";
+const baseUrl = "http://13.125.196.188:8080";
+// const baseUrl = "http://localhost:8080";
 
 export function getBoard(city,district,page) {
     return axios.get(`${baseUrl}/realestate/board/city/${city}/district/${district}/page/${page}`);
@@ -13,11 +14,6 @@ export function getDetailBoard(boardNo) {
 
 export function postNewContent(data) {
     return axios.post(`${baseUrl}/realestate/board`,data)
-        // ).then((res) => {
-        //     console.log("RESPONSE RECEIVED: ", res)
-        // }).catch((err) => {
-        //     console.log("AXIOS ERROR: ", err);
-        // });
 }
 
 export function postNewReply(data) {

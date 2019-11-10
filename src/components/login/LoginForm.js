@@ -118,7 +118,7 @@ class LoginForm extends Component {
                 </Modal.Content>
                 <Modal.Actions>
                     <Button onClick={this.close} negative>
-                        안해
+                        취소
                     </Button>
                 </Modal.Actions>
             </Modal>

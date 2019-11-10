@@ -3,7 +3,7 @@ import {BrowserRouter} from 'react-router-dom';
 import App from 'shared/App';
 
 const Root = () => (
-    <BrowserRouter>
+    <BrowserRouter basename='/realestate'>
         <App />
     </BrowserRouter>
 )
