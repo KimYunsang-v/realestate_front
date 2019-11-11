@@ -15,6 +15,7 @@
     "react-datepicker": "^2.0.0",
     "react-dom": "^16.6.3",
     "react-highcharts": "^16.0.2",
+    "react-kakao-maps": "0.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "react-validation": "^3.0.7",

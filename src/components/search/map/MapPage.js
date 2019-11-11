@@ -2,9 +2,10 @@
 import React, {Component} from 'react';
 import { Input, Grid,Segment, Header } from 'semantic-ui-react'
 import './MapPage.css';
-
+const { kakao } = window;
 var map = null;
 var marker = null;
+// var kakao = kakao;
 
 class MapPage extends Component {
     constructor(props) {
@@ -17,9 +18,12 @@ class MapPage extends Component {
     }
 
     componentDidMount() {
-        console.log("MapPage > componentDidMount");
-    
+        console.log("MapPage > componentDidMount");        
+        
+        this.kakao = kakao
+        // kakao.init('52b39c47d2be0c937abcae9bafe0bd16')
         let el = document.getElementById('map');
+        console.log(el);
         let options = {
             center: new daum.maps.LatLng(37.615095,127.0109226), //지도의 중심좌표.
             level: 3,
@@ -37,12 +41,10 @@ class MapPage extends Component {
         
         if(this.props.markerData !== nextProps.markerData && this.props.searchData === nextProps.searchData){            
             console.log("componentWillUpdate --- 마커찍자 ");
-            console.log(nextProps)
+            
             // 마커가 표시될 위치입니다
             const { latitude, longitude } = nextProps.markerData;
-            var markerPosition  = new daum.maps.LatLng(latitude, longitude);
-
-            
+            var markerPosition  = new daum.maps.LatLng(latitude, longitude);           
 
             if(marker){
                 marker.setPosition(markerPosition);
@@ -62,7 +64,7 @@ class MapPage extends Component {
             if(latitude === 0){
                 var bounds  = new daum.maps.LatLng(37.615095,127.0109226); 
             }else {
-                var bounds  = new daum.maps.LatLng(latitude, longitude); 
+                var bounds  = new kakao.maps.LatLng(latitude, longitude); 
             }            
             map.setCenter(bounds);
         }
@@ -96,6 +98,7 @@ class MapPage extends Component {
 
         return (
             <Segment basic>
+                
                     <Grid columns={2} horizontal>
                         <Grid.Column basic width={8} style={{ paddingTop : 0}}>
                             <Input style={{ width : '100%', height: '50px', fontSize: 20}} icon='search' placeholder='지역이나 역명' onChange={this.searchChange} 
@@ -105,7 +108,7 @@ class MapPage extends Component {
                             <Header as='h2' icon='building outline' content={this.state.searchRegion} />
                         </Grid.Column>
                     </Grid>
-                <Segment id="map" className="mapStyle" style={{ width : '100%', height: '550px'}}/>
+                <Segment id="map" className="map" style={{ width : '100%', height: '550px'}}/>
                 
             </Segment>
         )

@@ -12,10 +12,15 @@ class Navigator extends Component {
     }    
 
     clickLogoutBtn = () =>{ 
-        window.$loginInfo = '';
-        this.setState({
-            activeItem : 'logout'
-        })
+        var result = window.confirm("정말 로그아웃 하시겠습니까?");
+        if(result){
+            window.$loginInfo = '';
+            this.setState({
+                activeItem : 'logout'
+            })
+        }else{
+            return;
+        }        
     }
 
     hideFixedMenu = () => this.setState({ fixed: false })
@@ -40,7 +45,7 @@ class Navigator extends Component {
         } else {
             loginBtn = (
                 <NavLink exact to="/" style={{marginRight: 150}}>
-                    <Menu.Item  name='login' style={{margin:0}} onClick={this.clickLogoutBtn} >    
+                    <Menu.Item  name='login' style={{margin:0}} onClick={this.clickLogoutBtn}  position = 'right'>    
                         로그아웃
                 </Menu.Item>
                </NavLink>
@@ -54,30 +59,28 @@ class Navigator extends Component {
                         style={{margin: 0}}
                         size='large'
                     >
-                            {/* <NavLink exact to="/">  */}
-                                <Menu.Item style={{padding:0, marginLeft: 50, marginRight:20}} >
-                                    <Image src={logo} style={{width:150, height:50}}/>
+                                <Menu.Item style={{padding:0, marginLeft: 50, marginRight:20}}>
+                                    <Image src={logo} style={{width:150, height:50}}  position = 'left'/>
                                 </Menu.Item>
-                            {/* </NavLink> */}
 
                             <NavLink exact to="/" > 
                                 <Menu.Item name='home' onClick={this.handleItemClick} 
-                                    style={{marginRight:20, textlAlign: 'bottom'}} >
+                                    style={{marginRight:20, textlAlign: 'bottom'}}  position = 'right'>
                                     Home       
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/chart"> 
-                                <Menu.Item name='chart' style={{marginRight:20, textlAlign: 'bottom'}} onClick={this.handleItemClick} >                 
+                                <Menu.Item name='chart' style={{marginRight:20, textlAlign: 'bottom'}} onClick={this.handleItemClick}  position = 'right'>                 
                                     시세
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/search">  
-                                <Menu.Item  name='search' style={{marginRight:20}} onClick={this.handleItemClick}>
+                                <Menu.Item  name='search' style={{marginRight:20}} onClick={this.handleItemClick}  position = 'right'>
                                     거래 매물                                  
                                 </Menu.Item>
                             </NavLink>
-                            <NavLink exact to="/community">
-                                <Menu.Item name='community' style={{marginRight:20}} onClick={this.handleItemClick} >
+                            <NavLink exact to="/community" >
+                                <Menu.Item name='community' style={{marginRight:20}} onClick={this.handleItemClick}  position = 'right'>
                                     커뮤니티          
                                 </Menu.Item>
                             </NavLink>
