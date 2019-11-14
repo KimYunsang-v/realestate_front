@@ -2,10 +2,8 @@
 import React, {Component} from 'react';
 import { Input, Grid,Segment, Header } from 'semantic-ui-react'
 import './MapPage.css';
-const { kakao } = window;
 var map = null;
 var marker = null;
-// var kakao = kakao;
 
 class MapPage extends Component {
     constructor(props) {
@@ -20,7 +18,6 @@ class MapPage extends Component {
     componentDidMount() {
         console.log("MapPage > componentDidMount");        
         
-        this.kakao = kakao
         // kakao.init('52b39c47d2be0c937abcae9bafe0bd16')
         let el = document.getElementById('map');
         console.log(el);
@@ -64,7 +61,7 @@ class MapPage extends Component {
             if(latitude === 0){
                 var bounds  = new daum.maps.LatLng(37.615095,127.0109226); 
             }else {
-                var bounds  = new kakao.maps.LatLng(latitude, longitude); 
+                var bounds  = new daum.maps.LatLng(latitude, longitude); 
             }            
             map.setCenter(bounds);
         }

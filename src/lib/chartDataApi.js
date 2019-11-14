@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 
-const baseUrl = "http://13.209.97.126:8080";
-// const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://52.79.240.73:8080";
+const baseUrl = "http://localhost:8080";
 
 export function getOnlyCity(city) {
     return axios.get(`${baseUrl}/realestate/graph/city/${city}`);

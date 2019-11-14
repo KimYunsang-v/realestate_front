@@ -76,7 +76,7 @@ class Navigator extends Component {
                             </NavLink>
                             <NavLink exact to="/search">  
                                 <Menu.Item  name='search' style={{marginRight:20}} onClick={this.handleItemClick}  position = 'right'>
-                                    거래 매물                                  
+                                    거래 정보                                  
                                 </Menu.Item>
                             </NavLink>
                             <NavLink exact to="/community" >
@@ -84,10 +84,7 @@ class Navigator extends Component {
                                     커뮤니티          
                                 </Menu.Item>
                             </NavLink>
-                            
-                            
                                 {loginBtn}
-                            
                     </Menu>
         )
     }

@@ -29,7 +29,7 @@ class ResultList extends Component {
 
 
     render() {
-        const {name, area, floor, price, deposit} = this.props.info
+        const {name, area, floor, price, deposit, date} = this.props.info
         
 
         return (
@@ -41,13 +41,11 @@ class ResultList extends Component {
                         <font color="grey"><h4>{name}  {floor}층 </h4></font>                    
                     </List.Header>
                     {deposit?(<font color="orange">{deposit}/{price}</font>):(<font color="orange">{price}</font>)}만원
-                    <h4 className="title">({area}㎡)</h4>
+                    <h4 className="title">({area}㎡) ({date})</h4>
                 </List.Content>
                 <Grid.Column width={9}>                      
                 </Grid.Column>
             </List.Item>
-            
-            
         );
     }
 }

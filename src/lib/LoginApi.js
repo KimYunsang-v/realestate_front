@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 
-const baseUrl = "http://13.125.196.188:8080";
-// const baseUrl = "http://localhost:8080";
+// const baseUrl = "http://52.79.240.73:8080";
+const baseUrl = "http://localhost:8080";
 
 export function postSingUpClient(userdata) {
     return axios.post(`${baseUrl}/realestate/sign/client/`,userdata[0]);
